@@ -13,8 +13,8 @@ var dataNodes = [
         name: 'APITheoremsverticesvertex8',
         out_degree: 17.0,
         pagerank: 0.0008729418230626234,
-        x: 0,
-        y: 41
+        x: 1,
+        y: 8
     },
     {
         betweenness: 0.00044823232323232325,
@@ -30,8 +30,8 @@ var dataNodes = [
         name: 'APITheoremsedgeclique16',
         out_degree: 30.0,
         pagerank: 0.0008729418230626234,
-        x: 42,
-        y: 97
+        x: 46,
+        y: 60
     },
     {
         betweenness: 0.0006818181818181819,
@@ -47,8 +47,8 @@ var dataNodes = [
         name: 'APITheoremsverticesclique22',
         out_degree: 41.0,
         pagerank: 0.0008914225341361784,
-        x: 15,
-        y: 4
+        x: 35,
+        y: 81
     },
     {
         betweenness: 0.0005369620866196209,
@@ -64,8 +64,8 @@ var dataNodes = [
         name: 'APITheoremsconnectclique34',
         out_degree: 73.0,
         pagerank: 0.0008832259609642621,
-        x: 1,
-        y: 62
+        x: 40,
+        y: 60
     },
     {
         betweenness: 0.00020215895215895219,
@@ -81,8 +81,8 @@ var dataNodes = [
         name: 'APIempty4',
         out_degree: 3.0,
         pagerank: 0.0010130416202037461,
-        x: 85,
-        y: 37
+        x: 65,
+        y: 58
     },
     {
         betweenness: 0.00012372045762456722,
@@ -98,8 +98,8 @@ var dataNodes = [
         name: 'APIvertex8',
         out_degree: 3.0,
         pagerank: 0.0018380594308659705,
-        x: 68,
-        y: 77
+        x: 46,
+        y: 21
     },
     {
         betweenness: 4.324062543240625e-05,
@@ -115,8 +115,8 @@ var dataNodes = [
         name: 'APIoverlay12',
         out_degree: 7.0,
         pagerank: 0.0008775029402417713,
-        x: 6,
-        y: 68
+        x: 91,
+        y: 37
     },
     {
         betweenness: 6.918500069185002e-05,
@@ -132,8 +132,8 @@ var dataNodes = [
         name: 'APIconnect16',
         out_degree: 7.0,
         pagerank: 0.001197154950256054,
-        x: 66,
-        y: 99
+        x: 14,
+        y: 89
     },
     {
         betweenness: 0.00014067078279407047,
@@ -149,8 +149,8 @@ var dataNodes = [
         name: 'APIedge20',
         out_degree: 5.0,
         pagerank: 0.0008643226291491285,
-        x: 16,
-        y: 89
+        x: 63,
+        y: 77
     },
     {
         betweenness: 0.000511104192611042,
@@ -166,8 +166,8 @@ var dataNodes = [
         name: 'APIoverlays28',
         out_degree: 11.0,
         pagerank: 0.000874148020516083,
-        x: 48,
-        y: 38
+        x: 47,
+        y: 27
     },
     {
         betweenness: 0.00011674968866749689,
@@ -183,8 +183,8 @@ var dataNodes = [
         name: 'APIconnects32',
         out_degree: 11.0,
         pagerank: 0.0008291203356197885,
-        x: 60,
-        y: 85
+        x: 68,
+        y: 7
     },
     {
         betweenness: 0.0006914698695520613,
@@ -200,8 +200,8 @@ var dataNodes = [
         name: 'APIvertices36',
         out_degree: 13.0,
         pagerank: 0.00128509506147601,
-        x: 18,
-        y: 11
+        x: 70,
+        y: 73
     },
     {
         betweenness: 0.0005487758056251208,
@@ -217,8 +217,8 @@ var dataNodes = [
         name: 'APIedges40',
         out_degree: 19.0,
         pagerank: 0.0008553461007112518,
-        x: 86,
-        y: 12
+        x: 7,
+        y: 87
     },
     {
         betweenness: 1.8645737823820014e-05,
@@ -234,8 +234,8 @@ var dataNodes = [
         name: 'APIgraph44',
         out_degree: 11.0,
         pagerank: 0.0007518570907359336,
-        x: 86,
-        y: 14
+        x: 43,
+        y: 18
     },
     {
         betweenness: 3.079112668153764e-06,
@@ -251,8 +251,8 @@ var dataNodes = [
         name: 'APIfoldg54',
         out_degree: 3.0,
         pagerank: 0.0007518570907359336,
-        x: 10,
-        y: 46
+        x: 92,
+        y: 7
     },
     {
         betweenness: 0.00010858623872322503,
@@ -268,8 +268,8 @@ var dataNodes = [
         name: 'APIgo72',
         out_degree: 13.0,
         pagerank: 0.0013066127566435238,
-        x: 86,
-        y: 10
+        x: 81,
+        y: 68
     },
     {
         betweenness: 0.0003014394281517569,
@@ -285,8 +285,8 @@ var dataNodes = [
         name: 'APIpath86',
         out_degree: 15.0,
         pagerank: 0.0008010169774378985,
-        x: 86,
-        y: 17
+        x: 79,
+        y: 97
     },
     {
         betweenness: 6.448080078217065e-05,
@@ -302,8 +302,8 @@ var dataNodes = [
         name: 'APIcircuit96',
         out_degree: 13.0,
         pagerank: 0.0007518570907359336,
-        x: 22,
-        y: 92
+        x: 18,
+        y: 58
     },
     {
         betweenness: 0.00029849906562235334,
@@ -319,8 +319,8 @@ var dataNodes = [
         name: 'APIclique104',
         out_degree: 13.0,
         pagerank: 0.001181673157047192,
-        x: 59,
-        y: 83
+        x: 53,
+        y: 49
     },
     {
         betweenness: 3.079112668153764e-06,
@@ -336,8 +336,8 @@ var dataNodes = [
         name: 'APIbiclique108',
         out_degree: 9.0,
         pagerank: 0.0007518570907359336,
-        x: 12,
-        y: 42
+        x: 11,
+        y: 50
     },
     {
         betweenness: 5.67355019409814e-06,
@@ -353,8 +353,8 @@ var dataNodes = [
         name: 'APIstar116',
         out_degree: 7.0,
         pagerank: 0.0007518570907359336,
-        x: 15,
-        y: 39
+        x: 61,
+        y: 67
     },
     {
         betweenness: 1.210737512107375e-05,
@@ -370,8 +370,8 @@ var dataNodes = [
         name: 'APIclose124',
         out_degree: 18.0,
         pagerank: 0.0007518570907359336,
-        x: 40,
-        y: 51
+        x: 50,
+        y: 5
     },
     {
         betweenness: 0.0,
@@ -387,8 +387,8 @@ var dataNodes = [
         name: 'AgdaPrimitiveSet4',
         out_degree: 0.0,
         pagerank: 0.0008499452455903924,
-        x: 4,
-        y: 44
+        x: 27,
+        y: 70
     },
     {
         betweenness: 0.0,
@@ -404,8 +404,8 @@ var dataNodes = [
         name: 'AgdaPrimitiveProp6',
         out_degree: 0.0,
         pagerank: 0.0008499452455903924,
-        x: 77,
-        y: 45
+        x: 42,
+        y: 47
     },
     {
         betweenness: 0.0,
@@ -421,8 +421,8 @@ var dataNodes = [
         name: 'AgdaPrimitiveSetω8',
         out_degree: 0.0,
         pagerank: 0.0008499452455903924,
-        x: 70,
-        y: 95
+        x: 99,
+        y: 74
     },
     {
         betweenness: 0.0,
@@ -438,8 +438,8 @@ var dataNodes = [
         name: 'AgdaPrimitiveSSet10',
         out_degree: 0.0,
         pagerank: 0.0008499452455903924,
-        x: 61,
-        y: 80
+        x: 9,
+        y: 47
     },
     {
         betweenness: 0.0,
@@ -455,8 +455,8 @@ var dataNodes = [
         name: 'AgdaPrimitiveSSetω12',
         out_degree: 0.0,
         pagerank: 0.0008499452455903924,
-        x: 4,
-        y: 80
+        x: 60,
+        y: 81
     },
     {
         betweenness: 0.0,
@@ -472,8 +472,8 @@ var dataNodes = [
         name: 'AgdaPrimitiveLevel14',
         out_degree: 0.0,
         pagerank: 0.0030173056218458934,
-        x: 26,
-        y: 58
+        x: 74,
+        y: 19
     },
     {
         betweenness: 0.0,
@@ -489,8 +489,8 @@ var dataNodes = [
         name: 'AgdaPrimitivelzero16',
         out_degree: 1.0,
         pagerank: 0.0008499452455903924,
-        x: 41,
-        y: 44
+        x: 46,
+        y: 34
     },
     {
         betweenness: 0.0,
@@ -506,8 +506,8 @@ var dataNodes = [
         name: 'AgdaPrimitivelsuc20',
         out_degree: 2.0,
         pagerank: 0.0008499452455903924,
-        x: 20,
-        y: 94
+        x: 13,
+        y: 18
     },
     {
         betweenness: 0.0,
@@ -523,15 +523,15 @@ var dataNodes = [
         name: 'AgdaPrimitive26',
         out_degree: 3.0,
         pagerank: 0.0008499452455903924,
-        x: 71,
-        y: 53
+        x: 92,
+        y: 14
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 48.0,
-        eigen_centrality: 0.012987824157187815,
+        eigen_centrality: 0.012987824157187878,
         id: 31,
         in_degree: 5.0,
         index: 31,
@@ -540,8 +540,8 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsorleftcongruence14',
         out_degree: 43.0,
         pagerank: 0.0008579821909683459,
-        x: 46,
-        y: 71
+        x: 84,
+        y: 23
     },
     {
         betweenness: 0.0,
@@ -557,15 +557,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsorrightcongruence44',
         out_degree: 43.0,
         pagerank: 0.0008019650963728901,
-        x: 20,
-        y: 82
+        x: 40,
+        y: 9
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 48.0,
-        eigen_centrality: 0.01298782415718781,
+        eigen_centrality: 0.012987824157187874,
         id: 33,
         in_degree: 5.0,
         index: 33,
@@ -574,15 +574,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsandleftcongruence74',
         out_degree: 43.0,
         pagerank: 0.0008579821909683459,
-        x: 86,
-        y: 60
+        x: 50,
+        y: 4
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 48.0,
-        eigen_centrality: 0.01298782415718776,
+        eigen_centrality: 0.012987824157187858,
         id: 34,
         in_degree: 5.0,
         index: 34,
@@ -591,15 +591,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsandrightcongruence104',
         out_degree: 43.0,
         pagerank: 0.0008579821909683459,
-        x: 3,
-        y: 34
+        x: 77,
+        y: 24
     },
     {
         betweenness: 1.1242562612425626e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 25.0,
-        eigen_centrality: 0.007814167840495836,
+        eigen_centrality: 0.007814167840495908,
         id: 35,
         in_degree: 2.0,
         index: 35,
@@ -608,15 +608,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsoridempotence130',
         out_degree: 23.0,
         pagerank: 0.0008071018517365021,
-        x: 79,
-        y: 46
+        x: 24,
+        y: 90
     },
     {
         betweenness: 1.7296250172962501e-06,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 59.0,
-        eigen_centrality: 0.007814167840495833,
+        eigen_centrality: 0.007814167840495906,
         id: 36,
         in_degree: 2.0,
         index: 36,
@@ -625,15 +625,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsorcommutativity136',
         out_degree: 57.0,
         pagerank: 0.0008071018517365021,
-        x: 33,
-        y: 36
+        x: 81,
+        y: 78
     },
     {
         betweenness: 1.7296250172962501e-06,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 81.0,
-        eigen_centrality: 0.00781416784049583,
+        eigen_centrality: 0.0078141678404959,
         id: 37,
         in_degree: 2.0,
         index: 37,
@@ -642,15 +642,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsorassociativity144',
         out_degree: 79.0,
         pagerank: 0.0008071018517365021,
-        x: 9,
-        y: 62
+        x: 41,
+        y: 2
     },
     {
         betweenness: 5.6904663069046626e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 26.0,
-        eigen_centrality: 0.007814167840495862,
+        eigen_centrality: 0.007814167840495918,
         id: 38,
         in_degree: 2.0,
         index: 38,
@@ -659,15 +659,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsorfalseidentity154',
         out_degree: 24.0,
         pagerank: 0.0008071018517365021,
-        x: 89,
-        y: 57
+        x: 65,
+        y: 65
     },
     {
         betweenness: 1.7296250172962501e-06,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 81.0,
-        eigen_centrality: 0.00781416784049582,
+        eigen_centrality: 0.007814167840495902,
         id: 39,
         in_degree: 2.0,
         index: 39,
@@ -676,8 +676,8 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsandassociativity162',
         out_degree: 79.0,
         pagerank: 0.0008071018517365021,
-        x: 11,
-        y: 95
+        x: 49,
+        y: 45
     },
     {
         betweenness: 3.0268437802684377e-05,
@@ -693,15 +693,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsandleftfalse172',
         out_degree: 13.0,
         pagerank: 0.0007544067011228699,
-        x: 49,
-        y: 21
+        x: 63,
+        y: 72
     },
     {
         betweenness: 9.25349384253494e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 27.0,
-        eigen_centrality: 0.007814167840495857,
+        eigen_centrality: 0.00781416784049591,
         id: 41,
         in_degree: 2.0,
         index: 41,
@@ -710,15 +710,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsandrightfalse178',
         out_degree: 25.0,
         pagerank: 0.0008071018517365021,
-        x: 6,
-        y: 97
+        x: 37,
+        y: 83
     },
     {
         betweenness: 9.94534384945344e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 26.0,
-        eigen_centrality: 0.007814167840495842,
+        eigen_centrality: 0.007814167840495915,
         id: 42,
         in_degree: 2.0,
         index: 42,
@@ -727,15 +727,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsandlefttrue182',
         out_degree: 24.0,
         pagerank: 0.0008071018517365021,
-        x: 64,
-        y: 95
+        x: 19,
+        y: 45
     },
     {
         betweenness: 9.94534384945344e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 26.0,
-        eigen_centrality: 0.007814167840495845,
+        eigen_centrality: 0.007814167840495908,
         id: 43,
         in_degree: 2.0,
         index: 43,
@@ -744,15 +744,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsandrighttrue186',
         out_degree: 24.0,
         pagerank: 0.0008071018517365021,
-        x: 23,
-        y: 48
+        x: 75,
+        y: 28
     },
     {
         betweenness: 1.7296250172962501e-06,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 90.0,
-        eigen_centrality: 0.00781416784049585,
+        eigen_centrality: 0.007814167840495915,
         id: 44,
         in_degree: 2.0,
         index: 44,
@@ -761,15 +761,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsleftdistributivity194',
         out_degree: 88.0,
         pagerank: 0.0008071018517365021,
-        x: 4,
-        y: 47
+        x: 17,
+        y: 68
     },
     {
         betweenness: 4.324062543240625e-06,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 161.0,
-        eigen_centrality: 0.007814167840495856,
+        eigen_centrality: 0.007814167840495915,
         id: 45,
         in_degree: 2.0,
         index: 45,
@@ -778,15 +778,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsrightdistributivity208',
         out_degree: 159.0,
         pagerank: 0.0008071018517365021,
-        x: 29,
-        y: 26
+        x: 31,
+        y: 88
     },
     {
         betweenness: 0.007433409436834094,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 366.0,
-        eigen_centrality: 0.05884950505100628,
+        eigen_centrality: 0.058849505051007334,
         id: 46,
         in_degree: 336.0,
         index: 46,
@@ -795,15 +795,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheoremsbooldioid212',
         out_degree: 30.0,
         pagerank: 0.0018598288451870202,
-        x: 99,
-        y: 90
+        x: 72,
+        y: 68
     },
     {
         betweenness: 0.0006665974816659749,
         co: 'brown',
         current_flow_betweenness: 0.0,
         degree: 560.0,
-        eigen_centrality: 0.7345904552950104,
+        eigen_centrality: 0.734590455295009,
         id: 47,
         in_degree: 558.0,
         index: 47,
@@ -812,15 +812,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolBool6',
         out_degree: 2.0,
         pagerank: 0.06257961528798148,
-        x: 81,
-        y: 45
+        x: 64,
+        y: 34
     },
     {
         betweenness: 4.4970250449702506e-05,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 315.0,
-        eigen_centrality: 0.36294499819714987,
+        eigen_centrality: 0.3629449981971497,
         id: 48,
         in_degree: 313.0,
         index: 48,
@@ -829,15 +829,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolBooltrue8',
         out_degree: 2.0,
         pagerank: 0.030337699700760834,
-        x: 46,
-        y: 63
+        x: 61,
+        y: 4
     },
     {
         betweenness: 3.113325031133251e-05,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 292.0,
-        eigen_centrality: 0.34871001129286455,
+        eigen_centrality: 0.3487100112928643,
         id: 49,
         in_degree: 290.0,
         index: 49,
@@ -846,15 +846,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolBoolfalse10',
         out_degree: 2.0,
         pagerank: 0.030573756446392982,
-        x: 22,
-        y: 89
+        x: 89,
+        y: 65
     },
     {
         betweenness: 0.0013179742631797427,
         co: 'brown',
         current_flow_betweenness: 0.0,
         degree: 412.0,
-        eigen_centrality: 0.22875130344224756,
+        eigen_centrality: 0.2287513034422486,
         id: 50,
         in_degree: 407.0,
         index: 50,
@@ -863,15 +863,15 @@ var dataNodes = [
         name: 'AlgebraDioidBool16',
         out_degree: 5.0,
         pagerank: 0.006941382033647608,
-        x: 30,
-        y: 63
+        x: 0,
+        y: 27
     },
     {
         betweenness: 0.00024110972741109727,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 50.0,
-        eigen_centrality: 0.09061853402794635,
+        eigen_centrality: 0.09061853402794656,
         id: 51,
         in_degree: 47.0,
         index: 51,
@@ -880,15 +880,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolreflexivity20',
         out_degree: 3.0,
         pagerank: 0.002714438444275018,
-        x: 82,
-        y: 91
+        x: 76,
+        y: 54
     },
     {
         betweenness: 6.9185000691850005e-06,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 17.0,
-        eigen_centrality: 0.04856414230527804,
+        eigen_centrality: 0.04856414230527808,
         id: 52,
         in_degree: 12.0,
         index: 52,
@@ -897,15 +897,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolsymmetry26',
         out_degree: 5.0,
         pagerank: 0.0021473679537259054,
-        x: 15,
-        y: 98
+        x: 49,
+        y: 74
     },
     {
         betweenness: 6.9185000691850005e-06,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 19.0,
-        eigen_centrality: 0.048564142305278044,
+        eigen_centrality: 0.04856414230527809,
         id: 53,
         in_degree: 12.0,
         index: 53,
@@ -914,15 +914,15 @@ var dataNodes = [
         name: 'AlgebraDioidBooltransitivity34',
         out_degree: 7.0,
         pagerank: 0.0021473679537259054,
-        x: 28,
-        y: 69
+        x: 67,
+        y: 50
     },
     {
         betweenness: 0.00013491075134910752,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 144.0,
-        eigen_centrality: 0.12532875524365406,
+        eigen_centrality: 0.12532875524365453,
         id: 54,
         in_degree: 133.0,
         index: 54,
@@ -931,15 +931,15 @@ var dataNodes = [
         name: 'AlgebraDioidBoolor36',
         out_degree: 11.0,
         pagerank: 0.0022247414647278098,
-        x: 7,
-        y: 87
+        x: 17,
+        y: 34
     },
     {
         betweenness: 8.129237581292377e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 138.0,
-        eigen_centrality: 0.16041097103199672,
+        eigen_centrality: 0.16041097103199714,
         id: 55,
         in_degree: 127.0,
         index: 55,
@@ -948,15 +948,15 @@ var dataNodes = [
         name: 'AlgebraDioidBooland38',
         out_degree: 11.0,
         pagerank: 0.0024525174343497584,
-        x: 8,
-        y: 38
+        x: 22,
+        y: 42
     },
     {
         betweenness: 0.035914419052650685,
         co: 'brown',
         current_flow_betweenness: 0.0,
         degree: 129.0,
-        eigen_centrality: 0.12319824999171662,
+        eigen_centrality: 0.1231982499917187,
         id: 56,
         in_degree: 107.0,
         index: 56,
@@ -965,15 +965,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioid8',
         out_degree: 22.0,
         pagerank: 0.08746731076435539,
-        x: 92,
-        y: 97
+        x: 7,
+        y: 74
     },
     {
         betweenness: 2.723373209051914e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 180.0,
-        eigen_centrality: 0.02866999782076099,
+        eigen_centrality: 0.02866999782076163,
         id: 57,
         in_degree: 178.0,
         index: 57,
@@ -982,15 +982,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidzero126',
         out_degree: 2.0,
         pagerank: 0.00860815183385382,
-        x: 62,
-        y: 76
+        x: 64,
+        y: 39
     },
     {
         betweenness: 2.723373209051914e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 25.0,
-        eigen_centrality: 0.020702782611319966,
+        eigen_centrality: 0.02070278261132031,
         id: 58,
         in_degree: 23.0,
         index: 58,
@@ -999,15 +999,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidone128',
         out_degree: 2.0,
         pagerank: 0.006013778057252442,
-        x: 21,
-        y: 35
+        x: 64,
+        y: 93
     },
     {
         betweenness: 1.0377750103777502e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 29.0,
-        eigen_centrality: 0.04681521872747794,
+        eigen_centrality: 0.04681521872747824,
         id: 59,
         in_degree: 27.0,
         index: 59,
@@ -1016,15 +1016,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioid130',
         out_degree: 2.0,
         pagerank: 0.01495777267548459,
-        x: 33,
-        y: 60
+        x: 25,
+        y: 87
     },
     {
         betweenness: 1.0377750103777502e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 23.0,
-        eigen_centrality: 0.055456747871357584,
+        eigen_centrality: 0.05545674787135801,
         id: 60,
         in_degree: 21.0,
         index: 60,
@@ -1033,15 +1033,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioid132',
         out_degree: 2.0,
         pagerank: 0.01632284470607661,
-        x: 52,
-        y: 50
+        x: 70,
+        y: 19
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 4.0,
-        eigen_centrality: 0.016358536953815447,
+        eigen_centrality: 0.016358536953815613,
         id: 61,
         in_degree: 2.0,
         index: 61,
@@ -1050,15 +1050,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidreflexivity136',
         out_degree: 2.0,
         pagerank: 0.004120675460192418,
-        x: 88,
-        y: 94
+        x: 19,
+        y: 57
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 4.0,
-        eigen_centrality: 0.016358536953815474,
+        eigen_centrality: 0.01635853695381563,
         id: 62,
         in_degree: 2.0,
         index: 62,
@@ -1067,15 +1067,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidsymmetry142',
         out_degree: 2.0,
         pagerank: 0.004120675460192418,
-        x: 16,
-        y: 1
+        x: 60,
+        y: 57
     },
     {
         betweenness: 1.0377750103777502e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 5.0,
-        eigen_centrality: 0.016358536953815454,
+        eigen_centrality: 0.016358536953815613,
         id: 63,
         in_degree: 3.0,
         index: 63,
@@ -1084,15 +1084,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidtransitivity150',
         out_degree: 2.0,
         pagerank: 0.0043517004577013265,
-        x: 93,
-        y: 98
+        x: 13,
+        y: 1
     },
     {
         betweenness: 1.0377750103777502e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 7.0,
-        eigen_centrality: 0.016358536953815457,
+        eigen_centrality: 0.01635853695381563,
         id: 64,
         in_degree: 3.0,
         index: 64,
@@ -1101,15 +1101,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidleftcongruence158',
         out_degree: 4.0,
         pagerank: 0.004157738294017377,
-        x: 63,
-        y: 36
+        x: 77,
+        y: 31
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 6.0,
-        eigen_centrality: 0.016358536953815457,
+        eigen_centrality: 0.016358536953815627,
         id: 65,
         in_degree: 2.0,
         index: 65,
@@ -1118,15 +1118,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidleftcongruence166',
         out_degree: 4.0,
         pagerank: 0.004120675460192418,
-        x: 1,
-        y: 95
+        x: 73,
+        y: 34
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 6.0,
-        eigen_centrality: 0.01635853695381546,
+        eigen_centrality: 0.016358536953815627,
         id: 66,
         in_degree: 2.0,
         index: 66,
@@ -1135,15 +1135,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidrightcongruence174',
         out_degree: 4.0,
         pagerank: 0.004120675460192418,
-        x: 38,
-        y: 90
+        x: 95,
+        y: 72
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 5.0,
-        eigen_centrality: 0.016358536953815464,
+        eigen_centrality: 0.01635853695381562,
         id: 67,
         in_degree: 2.0,
         index: 67,
@@ -1152,15 +1152,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioididempotence178',
         out_degree: 3.0,
         pagerank: 0.004120675460192418,
-        x: 22,
-        y: 96
+        x: 94,
+        y: 44
     },
     {
         betweenness: 1.0377750103777502e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 7.0,
-        eigen_centrality: 0.016358536953815474,
+        eigen_centrality: 0.01635853695381564,
         id: 68,
         in_degree: 3.0,
         index: 68,
@@ -1169,15 +1169,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidcommutativity184',
         out_degree: 4.0,
         pagerank: 0.0042196861734105215,
-        x: 61,
-        y: 5
+        x: 94,
+        y: 11
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 8.0,
-        eigen_centrality: 0.016358536953815467,
+        eigen_centrality: 0.016358536953815613,
         id: 69,
         in_degree: 2.0,
         index: 69,
@@ -1186,15 +1186,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidassociativity192',
         out_degree: 6.0,
         pagerank: 0.004120675460192418,
-        x: 96,
-        y: 2
+        x: 64,
+        y: 75
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 6.0,
-        eigen_centrality: 0.016358536953815492,
+        eigen_centrality: 0.016358536953815637,
         id: 70,
         in_degree: 2.0,
         index: 70,
@@ -1203,15 +1203,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidzeroidentity196',
         out_degree: 4.0,
         pagerank: 0.004120675460192418,
-        x: 78,
-        y: 54
+        x: 46,
+        y: 9
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 8.0,
-        eigen_centrality: 0.016358536953815467,
+        eigen_centrality: 0.016358536953815627,
         id: 71,
         in_degree: 2.0,
         index: 71,
@@ -1220,15 +1220,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidassociativity204',
         out_degree: 6.0,
         pagerank: 0.004120675460192418,
-        x: 58,
-        y: 43
+        x: 89,
+        y: 0
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 7.0,
-        eigen_centrality: 0.016358536953815447,
+        eigen_centrality: 0.01635853695381561,
         id: 72,
         in_degree: 2.0,
         index: 72,
@@ -1237,15 +1237,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidleftzero208',
         out_degree: 5.0,
         pagerank: 0.004120675460192418,
-        x: 99,
-        y: 14
+        x: 71,
+        y: 6
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 7.0,
-        eigen_centrality: 0.016358536953815467,
+        eigen_centrality: 0.016358536953815627,
         id: 73,
         in_degree: 2.0,
         index: 73,
@@ -1254,15 +1254,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidrightzero212',
         out_degree: 5.0,
         pagerank: 0.004120675460192418,
-        x: 56,
-        y: 40
+        x: 38,
+        y: 47
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 6.0,
-        eigen_centrality: 0.016358536953815495,
+        eigen_centrality: 0.016358536953815644,
         id: 74,
         in_degree: 2.0,
         index: 74,
@@ -1271,15 +1271,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidleftidentity216',
         out_degree: 4.0,
         pagerank: 0.004120675460192418,
-        x: 99,
-        y: 68
+        x: 95,
+        y: 36
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 6.0,
-        eigen_centrality: 0.016358536953815478,
+        eigen_centrality: 0.01635853695381562,
         id: 75,
         in_degree: 2.0,
         index: 75,
@@ -1288,15 +1288,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidrightidentity220',
         out_degree: 4.0,
         pagerank: 0.004120675460192418,
-        x: 73,
-        y: 28
+        x: 95,
+        y: 19
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 9.0,
-        eigen_centrality: 0.016358536953815447,
+        eigen_centrality: 0.01635853695381561,
         id: 76,
         in_degree: 2.0,
         index: 76,
@@ -1305,15 +1305,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidleftdistributivity228',
         out_degree: 7.0,
         pagerank: 0.004120675460192418,
-        x: 78,
-        y: 20
+        x: 91,
+        y: 28
     },
     {
         betweenness: 0.0,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 9.0,
-        eigen_centrality: 0.0163585369538155,
+        eigen_centrality: 0.016358536953815634,
         id: 77,
         in_degree: 2.0,
         index: 77,
@@ -1322,15 +1322,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidrightdistributivity236',
         out_degree: 7.0,
         pagerank: 0.004120675460192418,
-        x: 23,
-        y: 89
+        x: 96,
+        y: 2
     },
     {
         betweenness: 1.4133507284192217e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 11.0,
-        eigen_centrality: 0.00035367816298719954,
+        eigen_centrality: 0.0003536781629872092,
         id: 78,
         in_degree: 8.0,
         index: 78,
@@ -1339,8 +1339,8 @@ var dataNodes = [
         name: 'AlgebraDioidDioidplus238',
         out_degree: 3.0,
         pagerank: 0.0009832358686187369,
-        x: 84,
-        y: 71
+        x: 59,
+        y: 22
     },
     {
         betweenness: 0.0,
@@ -1356,8 +1356,8 @@ var dataNodes = [
         name: 'AlgebraDioidDioidtimes244',
         out_degree: 3.0,
         pagerank: 0.0007412566764991743,
-        x: 48,
-        y: 51
+        x: 32,
+        y: 23
     },
     {
         betweenness: 0.0,
@@ -1373,8 +1373,8 @@ var dataNodes = [
         name: 'AlgebraDioidrightcongruence262',
         out_degree: 17.0,
         pagerank: 0.0007412566764991743,
-        x: 81,
-        y: 49
+        x: 48,
+        y: 27
     },
     {
         betweenness: 0.0,
@@ -1390,8 +1390,8 @@ var dataNodes = [
         name: 'AlgebraDioidtrans278',
         out_degree: 3.0,
         pagerank: 0.0008153823441490917,
-        x: 38,
-        y: 54
+        x: 18,
+        y: 55
     },
     {
         betweenness: 0.0,
@@ -1407,15 +1407,15 @@ var dataNodes = [
         name: 'AlgebraDioidcommut280',
         out_degree: 7.0,
         pagerank: 0.0008153823441490917,
-        x: 77,
-        y: 22
+        x: 80,
+        y: 9
     },
     {
         betweenness: 0.0,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 26.0,
-        eigen_centrality: 0.08123451882339688,
+        eigen_centrality: 0.08123451882339736,
         id: 83,
         in_degree: 24.0,
         index: 83,
@@ -1424,15 +1424,15 @@ var dataNodes = [
         name: 'AlgebraDioidDioidconstructor1451',
         out_degree: 2.0,
         pagerank: 0.0399292343261054,
-        x: 53,
-        y: 39
+        x: 35,
+        y: 33
     },
     {
         betweenness: 1.9183113828194777e-05,
         co: 'brown',
         current_flow_betweenness: 0.0,
         degree: 12.0,
-        eigen_centrality: 0.0010690277257291289,
+        eigen_centrality: 0.0010690277257290734,
         id: 84,
         in_degree: 9.0,
         index: 84,
@@ -1441,15 +1441,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoning12',
         out_degree: 3.0,
         pagerank: 0.0018190530676458559,
-        x: 49,
-        y: 62
+        x: 43,
+        y: 59
     },
     {
         betweenness: 0.00052580600525806,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 11.0,
-        eigen_centrality: 0.0007260848193700163,
+        eigen_centrality: 0.000726084819369977,
         id: 85,
         in_degree: 6.0,
         index: 85,
@@ -1458,15 +1458,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoningprove20',
         out_degree: 5.0,
         pagerank: 0.001606099343016125,
-        x: 1,
-        y: 99
+        x: 98,
+        y: 8
     },
     {
         betweenness: 0.0011545329353548532,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 23.0,
-        eigen_centrality: 0.0002357068585820109,
+        eigen_centrality: 0.00023570685858199646,
         id: 86,
         in_degree: 14.0,
         index: 86,
@@ -1475,15 +1475,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoningbegin28',
         out_degree: 9.0,
         pagerank: 0.0008459571009752978,
-        x: 72,
-        y: 13
+        x: 66,
+        y: 64
     },
     {
         betweenness: 8.994050089940503e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 111.0,
-        eigen_centrality: 0.0019638984526728614,
+        eigen_centrality: 0.0019638984526727846,
         id: 87,
         in_degree: 96.0,
         index: 87,
@@ -1492,15 +1492,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoning40',
         out_degree: 15.0,
         pagerank: 0.0011017834329248221,
-        x: 17,
-        y: 63
+        x: 42,
+        y: 2
     },
     {
         betweenness: 0.0016015833481586906,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 20.0,
-        eigen_centrality: 0.00023570685858202996,
+        eigen_centrality: 0.00023570685858200353,
         id: 88,
         in_degree: 14.0,
         index: 88,
@@ -1509,15 +1509,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoning50',
         out_degree: 6.0,
         pagerank: 0.0008459571009752978,
-        x: 81,
-        y: 84
+        x: 74,
+        y: 78
     },
     {
         betweenness: 0.00012107375121073753,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 43.0,
-        eigen_centrality: 0.000847580453637102,
+        eigen_centrality: 0.0008475804536371084,
         id: 89,
         in_degree: 30.0,
         index: 89,
@@ -1526,15 +1526,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoning60',
         out_degree: 13.0,
         pagerank: 0.0011304924857066941,
-        x: 36,
-        y: 17
+        x: 99,
+        y: 60
     },
     {
         betweenness: 0.0012827393306845364,
         co: 'brown',
         current_flow_betweenness: 0.0,
         degree: 12.0,
-        eigen_centrality: 0.0038802631987023,
+        eigen_centrality: 0.00388026319870212,
         id: 90,
         in_degree: 10.0,
         index: 90,
@@ -1543,15 +1543,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoningBinaryOperator62',
         out_degree: 2.0,
         pagerank: 0.013355464744716647,
-        x: 94,
-        y: 18
+        x: 49,
+        y: 91
     },
     {
         betweenness: 2.0755500207555003e-05,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 310.0,
-        eigen_centrality: 0.008388322158274493,
+        eigen_centrality: 0.008388322158274135,
         id: 91,
         in_degree: 308.0,
         index: 91,
@@ -1560,15 +1560,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoningBinaryOperatorop64',
         out_degree: 2.0,
         pagerank: 0.0076081344706049455,
-        x: 45,
-        y: 25
+        x: 33,
+        y: 73
     },
     {
         betweenness: 2.9057700290577002e-05,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 24.0,
-        eigen_centrality: 0.002201799106860704,
+        eigen_centrality: 0.002201799106860601,
         id: 92,
         in_degree: 22.0,
         index: 92,
@@ -1577,15 +1577,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoningBinaryOperatorop66',
         out_degree: 2.0,
         pagerank: 0.006948562862034499,
-        x: 67,
-        y: 71
+        x: 5,
+        y: 89
     },
     {
         betweenness: 0.0006202188222736166,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 224.0,
-        eigen_centrality: 0.005712894712136559,
+        eigen_centrality: 0.005712894712136325,
         id: 93,
         in_degree: 210.0,
         index: 93,
@@ -1595,14 +1595,14 @@ var dataNodes = [
         out_degree: 14.0,
         pagerank: 0.0018271156253712977,
         x: 42,
-        y: 84
+        y: 95
     },
     {
         betweenness: 0.0008034420318126159,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 101.0,
-        eigen_centrality: 0.0014791199659878065,
+        eigen_centrality: 0.0014791199659877276,
         id: 94,
         in_degree: 71.0,
         index: 94,
@@ -1611,15 +1611,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoningL90',
         out_degree: 30.0,
         pagerank: 0.0009718469689229583,
-        x: 45,
-        y: 29
+        x: 60,
+        y: 18
     },
     {
         betweenness: 0.002461363471637444,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 75.0,
-        eigen_centrality: 0.0008505050066507851,
+        eigen_centrality: 0.0008505050066507643,
         id: 95,
         in_degree: 45.0,
         index: 95,
@@ -1628,15 +1628,15 @@ var dataNodes = [
         name: 'AlgebraGraphReasoningR118',
         out_degree: 30.0,
         pagerank: 0.0009399803896192637,
-        x: 44,
-        y: 90
+        x: 86,
+        y: 29
     },
     {
         betweenness: 0.0007023945172827653,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 162.0,
-        eigen_centrality: 0.00020107295075067773,
+        eigen_centrality: 0.00020107295075066196,
         id: 96,
         in_degree: 5.0,
         index: 96,
@@ -1645,15 +1645,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremspreidempotence10',
         out_degree: 157.0,
         pagerank: 0.0007898236152705366,
-        x: 92,
-        y: 40
+        x: 89,
+        y: 85
     },
     {
         betweenness: 0.0019408925109177459,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 324.0,
-        eigen_centrality: 0.0003534310666652334,
+        eigen_centrality: 0.00035343106666523233,
         id: 97,
         in_degree: 8.0,
         index: 97,
@@ -1662,15 +1662,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsidentity18',
         out_degree: 316.0,
         pagerank: 0.0009003340459623785,
-        x: 40,
-        y: 21
+        x: 10,
+        y: 22
     },
     {
         betweenness: 0.0023540850388363006,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 38.0,
-        eigen_centrality: 0.0004540131052129298,
+        eigen_centrality: 0.00045401310521293354,
         id: 98,
         in_degree: 19.0,
         index: 98,
@@ -1679,8 +1679,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsidempotence26',
         out_degree: 19.0,
         pagerank: 0.0009595225522694838,
-        x: 21,
-        y: 76
+        x: 83,
+        y: 22
     },
     {
         betweenness: 4.696243701290565e-05,
@@ -1696,15 +1696,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremssaturation32',
         out_degree: 51.0,
         pagerank: 0.0007396322525013059,
-        x: 42,
-        y: 65
+        x: 8,
+        y: 1
     },
     {
         betweenness: 0.0011625458642401684,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 122.0,
-        eigen_centrality: 0.00046830691146078487,
+        eigen_centrality: 0.000468306911460791,
         id: 100,
         in_degree: 15.0,
         index: 100,
@@ -1713,8 +1713,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsabsorption42',
         out_degree: 107.0,
         pagerank: 0.00077692610555673,
-        x: 27,
-        y: 64
+        x: 62,
+        y: 90
     },
     {
         betweenness: 0.00018809672063096726,
@@ -1730,8 +1730,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsreflexivity52',
         out_degree: 5.0,
         pagerank: 0.0007581129635748609,
-        x: 95,
-        y: 16
+        x: 87,
+        y: 4
     },
     {
         betweenness: 1.5739087476650563e-05,
@@ -1747,7 +1747,7 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsantisymmetry60',
         out_degree: 18.0,
         pagerank: 0.0007396322525013059,
-        x: 56,
+        x: 23,
         y: 79
     },
     {
@@ -1764,8 +1764,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremstransitivity74',
         out_degree: 46.0,
         pagerank: 0.0007581129635748609,
-        x: 52,
-        y: 1
+        x: 3,
+        y: 40
     },
     {
         betweenness: 2.6520916931875836e-05,
@@ -1781,8 +1781,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsleastelement84',
         out_degree: 14.0,
         pagerank: 0.0007396322525013059,
-        x: 94,
-        y: 81
+        x: 46,
+        y: 22
     },
     {
         betweenness: 4.710042020784631e-05,
@@ -1798,8 +1798,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsoverlay92',
         out_degree: 19.0,
         pagerank: 0.0007396322525013059,
-        x: 15,
-        y: 20
+        x: 6,
+        y: 1
     },
     {
         betweenness: 0.00022300631889672986,
@@ -1815,8 +1815,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsconnect100',
         out_degree: 34.0,
         pagerank: 0.0007581129635748609,
-        x: 99,
-        y: 10
+        x: 56,
+        y: 56
     },
     {
         betweenness: 0.00036140052902850314,
@@ -1832,8 +1832,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsleftoverlaymonotony110',
         out_degree: 107.0,
         pagerank: 0.0007605884996555097,
-        x: 48,
-        y: 14
+        x: 86,
+        y: 20
     },
     {
         betweenness: 0.0004081446204733876,
@@ -1849,8 +1849,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsrightoverlaymonotony128',
         out_degree: 100.0,
         pagerank: 0.0007611121198025937,
-        x: 89,
-        y: 63
+        x: 51,
+        y: 66
     },
     {
         betweenness: 0.00030527831537204285,
@@ -1866,8 +1866,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsleftconnectmonotony146',
         out_degree: 40.0,
         pagerank: 0.0007605884996555097,
-        x: 9,
-        y: 48
+        x: 7,
+        y: 44
     },
     {
         betweenness: 0.00040002361920170136,
@@ -1883,8 +1883,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsrightconnectmonotony164',
         out_degree: 40.0,
         pagerank: 0.0007611121198025937,
-        x: 93,
-        y: 76
+        x: 14,
+        y: 33
     },
     {
         betweenness: 1.3342821561999643e-05,
@@ -1900,8 +1900,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsleftmonotony184',
         out_degree: 30.0,
         pagerank: 0.0007396322525013059,
-        x: 3,
-        y: 69
+        x: 14,
+        y: 34
     },
     {
         betweenness: 0.00032259977465456913,
@@ -1917,15 +1917,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsrightmonotony212',
         out_degree: 30.0,
         pagerank: 0.0007581129635748609,
-        x: 90,
-        y: 38
+        x: 75,
+        y: 45
     },
     {
         betweenness: 0.0008689054543416471,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 52.0,
-        eigen_centrality: 0.0001388203570017257,
+        eigen_centrality: 0.00013882035700171308,
         id: 113,
         in_degree: 8.0,
         index: 113,
@@ -1934,15 +1934,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsflipend238',
         out_degree: 44.0,
         pagerank: 0.0007510339739616647,
-        x: 16,
-        y: 49
+        x: 27,
+        y: 91
     },
     {
         betweenness: 0.00020064677238433546,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 802.0,
-        eigen_centrality: 0.000146573099655022,
+        eigen_centrality: 0.00014657309965502132,
         id: 114,
         in_degree: 3.0,
         index: 114,
@@ -1951,15 +1951,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsltriple248',
         out_degree: 799.0,
         pagerank: 0.0007433192869969896,
-        x: 13,
-        y: 92
+        x: 45,
+        y: 70
     },
     {
         betweenness: 0.0005864108054086425,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 245.0,
-        eigen_centrality: 0.00014657309965503934,
+        eigen_centrality: 0.00014657309965502958,
         id: 115,
         in_degree: 3.0,
         index: 115,
@@ -1968,15 +1968,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsltriple264',
         out_degree: 242.0,
         pagerank: 0.0007433192869969896,
-        x: 56,
-        y: 59
+        x: 29,
+        y: 92
     },
     {
         betweenness: 0.0005874485804190203,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 274.0,
-        eigen_centrality: 0.00016603540100508258,
+        eigen_centrality: 0.00016603540100509513,
         id: 116,
         in_degree: 4.0,
         index: 116,
@@ -1985,15 +1985,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsltriple280',
         out_degree: 270.0,
         pagerank: 0.0007595298980825805,
-        x: 10,
-        y: 55
+        x: 43,
+        y: 5
     },
     {
         betweenness: 0.0010673042143842435,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 198.0,
-        eigen_centrality: 0.00014657309965500633,
+        eigen_centrality: 0.00014657309965501253,
         id: 117,
         in_degree: 3.0,
         index: 117,
@@ -2002,15 +2002,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsrtriple296',
         out_degree: 195.0,
         pagerank: 0.000743780979221231,
-        x: 11,
-        y: 75
+        x: 17,
+        y: 0
     },
     {
         betweenness: 0.00023696889774755677,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 808.0,
-        eigen_centrality: 0.00014657309965502842,
+        eigen_centrality: 0.00014657309965502373,
         id: 118,
         in_degree: 3.0,
         index: 118,
@@ -2019,15 +2019,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsrtriple312',
         out_degree: 805.0,
         pagerank: 0.000743780979221231,
-        x: 51,
-        y: 32
+        x: 55,
+        y: 44
     },
     {
         betweenness: 0.00010856229673821597,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 42.0,
-        eigen_centrality: 0.00014657309965499668,
+        eigen_centrality: 0.00014657309965500806,
         id: 119,
         in_degree: 3.0,
         index: 119,
@@ -2036,15 +2036,15 @@ var dataNodes = [
         name: 'AlgebraGraphTheoremsrtriple328',
         out_degree: 39.0,
         pagerank: 0.000743780979221231,
-        x: 64,
-        y: 94
+        x: 43,
+        y: 59
     },
     {
         betweenness: 0.003700228729805317,
         co: 'brown',
         current_flow_betweenness: 0.0,
         degree: 363.0,
-        eigen_centrality: 0.17611490701442195,
+        eigen_centrality: 0.17611490701442054,
         id: 120,
         in_degree: 359.0,
         index: 120,
@@ -2053,15 +2053,15 @@ var dataNodes = [
         name: 'AlgebraGraphGraph6',
         out_degree: 4.0,
         pagerank: 0.14000013772150272,
-        x: 81,
-        y: 60
+        x: 78,
+        y: 58
     },
     {
         betweenness: 0.0,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 216.0,
-        eigen_centrality: 0.04100252400240453,
+        eigen_centrality: 0.041002524002404166,
         id: 121,
         in_degree: 214.0,
         index: 121,
@@ -2070,15 +2070,15 @@ var dataNodes = [
         name: 'AlgebraGraphGraphε10',
         out_degree: 2.0,
         pagerank: 0.03242419027294601,
-        x: 95,
-        y: 46
+        x: 58,
+        y: 71
     },
     {
         betweenness: 0.0,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 14.0,
-        eigen_centrality: 0.031717504370480445,
+        eigen_centrality: 0.03171750437048035,
         id: 122,
         in_degree: 12.0,
         index: 122,
@@ -2087,15 +2087,15 @@ var dataNodes = [
         name: 'AlgebraGraphGraphv12',
         out_degree: 2.0,
         pagerank: 0.0312684949732756,
-        x: 51,
-        y: 44
+        x: 78,
+        y: 9
     },
     {
         betweenness: 0.00033969835339698365,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 1718.0,
-        eigen_centrality: 0.07891541544594562,
+        eigen_centrality: 0.0789154154459447,
         id: 123,
         in_degree: 1714.0,
         index: 123,
@@ -2104,15 +2104,15 @@ var dataNodes = [
         name: 'AlgebraGraphGraph14',
         out_degree: 4.0,
         pagerank: 0.038910078265825605,
-        x: 66,
-        y: 97
+        x: 91,
+        y: 60
     },
     {
         betweenness: 0.0001999996855227241,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 758.0,
-        eigen_centrality: 0.05817115552258503,
+        eigen_centrality: 0.05817115552258427,
         id: 124,
         in_degree: 754.0,
         index: 124,
@@ -2121,15 +2121,15 @@ var dataNodes = [
         name: 'AlgebraGraphGraph16',
         out_degree: 4.0,
         pagerank: 0.03577952303822643,
-        x: 37,
-        y: 85
+        x: 89,
+        y: 15
     },
     {
         betweenness: 0.01682573849431685,
         co: 'brown',
         current_flow_betweenness: 0.0,
         degree: 197.0,
-        eigen_centrality: 0.030392931210759852,
+        eigen_centrality: 0.030392931210759366,
         id: 125,
         in_degree: 181.0,
         index: 125,
@@ -2138,15 +2138,15 @@ var dataNodes = [
         name: 'AlgebraGraph24',
         out_degree: 16.0,
         pagerank: 0.009298339638369197,
-        x: 36,
-        y: 21
+        x: 17,
+        y: 81
     },
     {
         betweenness: 0.00035934906498418336,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 12.0,
-        eigen_centrality: 0.004224886906748169,
+        eigen_centrality: 0.004224886906748097,
         id: 126,
         in_degree: 9.0,
         index: 126,
@@ -2155,15 +2155,15 @@ var dataNodes = [
         name: 'AlgebraGraphreflexivity30',
         out_degree: 3.0,
         pagerank: 0.001419162986598535,
-        x: 16,
-        y: 51
+        x: 89,
+        y: 28
     },
     {
         betweenness: 0.00026970619436372865,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 71.0,
-        eigen_centrality: 0.005308649983945773,
+        eigen_centrality: 0.00530864998394568,
         id: 127,
         in_degree: 66.0,
         index: 127,
@@ -2172,15 +2172,15 @@ var dataNodes = [
         name: 'AlgebraGraphsymmetry36',
         out_degree: 5.0,
         pagerank: 0.0016162560262028317,
-        x: 11,
-        y: 78
+        x: 2,
+        y: 15
     },
     {
         betweenness: 0.00031825100318251,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 17.0,
-        eigen_centrality: 0.004701272306364222,
+        eigen_centrality: 0.004701272306364131,
         id: 128,
         in_degree: 10.0,
         index: 128,
@@ -2189,15 +2189,15 @@ var dataNodes = [
         name: 'AlgebraGraphtransitivity44',
         out_degree: 7.0,
         pagerank: 0.0014817446152767648,
-        x: 17,
-        y: 18
+        x: 93,
+        y: 7
     },
     {
         betweenness: 0.00027552402396736143,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 16.0,
-        eigen_centrality: 0.0044156566668970615,
+        eigen_centrality: 0.004415656666896979,
         id: 129,
         in_degree: 8.0,
         index: 129,
@@ -2206,15 +2206,15 @@ var dataNodes = [
         name: 'AlgebraGraphleftcongruence52',
         out_degree: 8.0,
         pagerank: 0.0013092189300927051,
-        x: 3,
-        y: 64
+        x: 52,
+        y: 35
     },
     {
         betweenness: 0.00011403170649745993,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 15.0,
-        eigen_centrality: 0.004378614764238528,
+        eigen_centrality: 0.00437861476423843,
         id: 130,
         in_degree: 7.0,
         index: 130,
@@ -2223,7 +2223,7 @@ var dataNodes = [
         name: 'AlgebraGraphleftcongruence60',
         out_degree: 8.0,
         pagerank: 0.001282494038541638,
-        x: 66,
+        x: 13,
         y: 55
     },
     {
@@ -2231,7 +2231,7 @@ var dataNodes = [
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 15.0,
-        eigen_centrality: 0.004295145875332005,
+        eigen_centrality: 0.0042951458753319235,
         id: 131,
         in_degree: 7.0,
         index: 131,
@@ -2240,15 +2240,15 @@ var dataNodes = [
         name: 'AlgebraGraphrightcongruence68',
         out_degree: 8.0,
         pagerank: 0.0012815911521280334,
-        x: 15,
-        y: 17
+        x: 96,
+        y: 38
     },
     {
         betweenness: 0.00034833300088592755,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 31.0,
-        eigen_centrality: 0.004755907859199748,
+        eigen_centrality: 0.0047559078591996595,
         id: 132,
         in_degree: 25.0,
         index: 132,
@@ -2257,15 +2257,15 @@ var dataNodes = [
         name: 'AlgebraGraphcommutativity74',
         out_degree: 6.0,
         pagerank: 0.001451390919964973,
-        x: 19,
-        y: 45
+        x: 56,
+        y: 25
     },
     {
         betweenness: 0.0003711775287117753,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 59.0,
-        eigen_centrality: 0.005138702963155466,
+        eigen_centrality: 0.005138702963155347,
         id: 133,
         in_degree: 50.0,
         index: 133,
@@ -2274,15 +2274,15 @@ var dataNodes = [
         name: 'AlgebraGraphassociativity82',
         out_degree: 9.0,
         pagerank: 0.001454506497741749,
-        x: 92,
-        y: 62
+        x: 12,
+        y: 35
     },
     {
         betweenness: 0.000764550788679058,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 11.0,
-        eigen_centrality: 0.004182213933671819,
+        eigen_centrality: 0.004182213933671736,
         id: 134,
         in_degree: 6.0,
         index: 134,
@@ -2291,15 +2291,15 @@ var dataNodes = [
         name: 'AlgebraGraphleftidentity86',
         out_degree: 5.0,
         pagerank: 0.0012662207027107726,
-        x: 91,
-        y: 19
+        x: 13,
+        y: 4
     },
     {
         betweenness: 0.0007676641137101913,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 19.0,
-        eigen_centrality: 0.0045022569880948,
+        eigen_centrality: 0.004502256988094702,
         id: 135,
         in_degree: 14.0,
         index: 135,
@@ -2308,7 +2308,7 @@ var dataNodes = [
         name: 'AlgebraGraphrightidentity90',
         out_degree: 5.0,
         pagerank: 0.0013248419529021706,
-        x: 35,
+        x: 89,
         y: 39
     },
     {
@@ -2316,7 +2316,7 @@ var dataNodes = [
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 15.0,
-        eigen_centrality: 0.0041822139336718045,
+        eigen_centrality: 0.004182213933671729,
         id: 136,
         in_degree: 6.0,
         index: 136,
@@ -2325,15 +2325,15 @@ var dataNodes = [
         name: 'AlgebraGraphassociativity98',
         out_degree: 9.0,
         pagerank: 0.0012574344785536559,
-        x: 60,
-        y: 88
+        x: 82,
+        y: 86
     },
     {
         betweenness: 0.00011765044143624463,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 15.0,
-        eigen_centrality: 0.004055103135366909,
+        eigen_centrality: 0.00405510313536681,
         id: 137,
         in_degree: 5.0,
         index: 137,
@@ -2342,15 +2342,15 @@ var dataNodes = [
         name: 'AlgebraGraphleftdistributivity106',
         out_degree: 10.0,
         pagerank: 0.0012604277039010717,
-        x: 28,
-        y: 31
+        x: 10,
+        y: 92
     },
     {
         betweenness: 0.00011491598664699531,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 15.0,
-        eigen_centrality: 0.00405510313536692,
+        eigen_centrality: 0.004055103135366821,
         id: 138,
         in_degree: 5.0,
         index: 138,
@@ -2359,15 +2359,15 @@ var dataNodes = [
         name: 'AlgebraGraphrightdistributivity114',
         out_degree: 10.0,
         pagerank: 0.0012604111705719486,
-        x: 37,
-        y: 32
+        x: 18,
+        y: 25
     },
     {
         betweenness: 1.7562807102035e-05,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 22.0,
-        eigen_centrality: 0.004417668776475483,
+        eigen_centrality: 0.004417668776475402,
         id: 139,
         in_degree: 10.0,
         index: 139,
@@ -2376,15 +2376,15 @@ var dataNodes = [
         name: 'AlgebraGraphdecomposition122',
         out_degree: 12.0,
         pagerank: 0.001274074229589429,
-        x: 30,
-        y: 39
+        x: 80,
+        y: 97
     },
     {
         betweenness: 9.87862974164344e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 31.0,
-        eigen_centrality: 0.0002789673426652776,
+        eigen_centrality: 0.000278967342665283,
         id: 140,
         in_degree: 6.0,
         index: 140,
@@ -2393,8 +2393,8 @@ var dataNodes = [
         name: 'AlgebraGraphrightcongruence132',
         out_degree: 25.0,
         pagerank: 0.0007860262220902104,
-        x: 81,
-        y: 32
+        x: 65,
+        y: 93
     },
     {
         betweenness: 0.0006231262395645958,
@@ -2410,8 +2410,8 @@ var dataNodes = [
         name: 'AlgebraGraph144',
         out_degree: 6.0,
         pagerank: 0.0019119711635084704,
-        x: 41,
-        y: 9
+        x: 82,
+        y: 37
     },
     {
         betweenness: 7.696831326968313e-05,
@@ -2427,8 +2427,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphReasoning18',
         out_degree: 4.0,
         pagerank: 0.001558016287640622,
-        x: 56,
-        y: 50
+        x: 31,
+        y: 70
     },
     {
         betweenness: 0.0005923965684239657,
@@ -2444,8 +2444,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphReasoningprove32',
         out_degree: 6.0,
         pagerank: 0.0013677903222560988,
-        x: 74,
-        y: 3
+        x: 44,
+        y: 0
     },
     {
         betweenness: 0.0003018195655181957,
@@ -2461,8 +2461,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphReasoningbegin46',
         out_degree: 11.0,
         pagerank: 0.0008177432617570088,
-        x: 37,
-        y: 70
+        x: 43,
+        y: 16
     },
     {
         betweenness: 0.00014615331396153314,
@@ -2478,8 +2478,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphReasoning64',
         out_degree: 17.0,
         pagerank: 0.0009375722728115717,
-        x: 63,
-        y: 31
+        x: 32,
+        y: 10
     },
     {
         betweenness: 0.0005436211429362116,
@@ -2495,8 +2495,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphReasoning80',
         out_degree: 8.0,
         pagerank: 0.0008177432617570088,
-        x: 69,
-        y: 47
+        x: 18,
+        y: 79
     },
     {
         betweenness: 8.042756330427564e-05,
@@ -2512,8 +2512,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphReasoning96',
         out_degree: 15.0,
         pagerank: 0.0008200758839075496,
-        x: 6,
-        y: 95
+        x: 14,
+        y: 55
     },
     {
         betweenness: 0.00010464231354642312,
@@ -2529,8 +2529,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphReasoningL114',
         out_degree: 17.0,
         pagerank: 0.0008407079372920579,
-        x: 81,
-        y: 52
+        x: 57,
+        y: 28
     },
     {
         betweenness: 9.772381347723814e-05,
@@ -2546,8 +2546,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphReasoningR132',
         out_degree: 17.0,
         pagerank: 0.0008328322628281549,
-        x: 98,
-        y: 95
+        x: 10,
+        y: 15
     },
     {
         betweenness: 0.00021514761240788637,
@@ -2563,8 +2563,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsassociativity22',
         out_degree: 38.0,
         pagerank: 0.0007805278527977273,
-        x: 53,
-        y: 49
+        x: 4,
+        y: 11
     },
     {
         betweenness: 0.00014596261171603638,
@@ -2580,8 +2580,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsabsorption46',
         out_degree: 116.0,
         pagerank: 0.0007612715591785602,
-        x: 35,
-        y: 93
+        x: 18,
+        y: 73
     },
     {
         betweenness: 0.00019093286216573886,
@@ -2597,8 +2597,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsidempotence66',
         out_degree: 152.0,
         pagerank: 0.0007517142332232681,
-        x: 93,
-        y: 15
+        x: 31,
+        y: 47
     },
     {
         betweenness: 0.00013212561157766638,
@@ -2614,8 +2614,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsleftabsorption84',
         out_degree: 233.0,
         pagerank: 0.0007483919571479563,
-        x: 65,
-        y: 76
+        x: 91,
+        y: 40
     },
     {
         betweenness: 0.00029816961323810644,
@@ -2631,8 +2631,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsrightabsorption106',
         out_degree: 93.0,
         pagerank: 0.000746969512308417,
-        x: 88,
-        y: 23
+        x: 98,
+        y: 28
     },
     {
         betweenness: 0.00016395071189591738,
@@ -2648,8 +2648,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsrightdistributivity130',
         out_degree: 203.0,
         pagerank: 0.0007445383091976767,
-        x: 52,
-        y: 2
+        x: 16,
+        y: 20
     },
     {
         betweenness: 0.0002262172125185824,
@@ -2665,15 +2665,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsleftdistributivity156',
         out_degree: 263.0,
         pagerank: 0.0007445383091976767,
-        x: 63,
-        y: 72
+        x: 69,
+        y: 30
     },
     {
         betweenness: 0.003081747020103184,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 507.0,
-        eigen_centrality: 0.06275370596605832,
+        eigen_centrality: 0.06275370596605961,
         id: 157,
         in_degree: 468.0,
         index: 157,
@@ -2682,15 +2682,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremstograph168',
         out_degree: 39.0,
         pagerank: 0.0021967637737213765,
-        x: 24,
-        y: 79
+        x: 80,
+        y: 52
     },
     {
         betweenness: 0.002035950074555305,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 1187.0,
-        eigen_centrality: 0.0009744687768941008,
+        eigen_centrality: 0.0009744687768941239,
         id: 158,
         in_degree: 12.0,
         index: 158,
@@ -2699,15 +2699,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremslabelledgraphlaws186',
         out_degree: 1175.0,
         pagerank: 0.0007765136592766365,
-        x: 44,
-        y: 46
+        x: 82,
+        y: 86
     },
     {
         betweenness: 2.6125804457062242e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 85.0,
-        eigen_centrality: 0.00012939212609132093,
+        eigen_centrality: 0.0001293921260913377,
         id: 159,
         in_degree: 2.0,
         index: 159,
@@ -2716,15 +2716,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremswith198200',
         out_degree: 83.0,
         pagerank: 0.00074271864055341,
-        x: 42,
-        y: 48
+        x: 67,
+        y: 38
     },
     {
         betweenness: 2.9585054491654738e-05,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 85.0,
-        eigen_centrality: 0.0001293921260913658,
+        eigen_centrality: 0.00012939212609135842,
         id: 160,
         in_degree: 2.0,
         index: 160,
@@ -2733,15 +2733,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremswith214216',
         out_degree: 83.0,
         pagerank: 0.00074271864055341,
-        x: 36,
-        y: 89
+        x: 47,
+        y: 27
     },
     {
         betweenness: 0.0002846648301193756,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 134.0,
-        eigen_centrality: 0.00021506092719043778,
+        eigen_centrality: 0.00021506092719047662,
         id: 161,
         in_degree: 5.0,
         index: 161,
@@ -2750,15 +2750,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsdioidrecur242',
         out_degree: 129.0,
         pagerank: 0.0007576963592834312,
-        x: 52,
-        y: 15
+        x: 32,
+        y: 80
     },
     {
         betweenness: 0.0005380796040820948,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 55.0,
-        eigen_centrality: 0.0001293921260913429,
+        eigen_centrality: 0.00012939212609134812,
         id: 162,
         in_degree: 2.0,
         index: 162,
@@ -2767,15 +2767,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremswith252254',
         out_degree: 53.0,
         pagerank: 0.00074271864055341,
-        x: 99,
-        y: 21
+        x: 62,
+        y: 28
     },
     {
         betweenness: 0.00047339162843521503,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 41.0,
-        eigen_centrality: 0.00012939212609132825,
+        eigen_centrality: 0.00012939212609133985,
         id: 163,
         in_degree: 2.0,
         index: 163,
@@ -2784,15 +2784,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremswith262264',
         out_degree: 39.0,
         pagerank: 0.00074271864055341,
-        x: 15,
-        y: 85
+        x: 67,
+        y: 99
     },
     {
         betweenness: 0.0002300086795728141,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 204.0,
-        eigen_centrality: 0.00012939212609133866,
+        eigen_centrality: 0.0001293921260913462,
         id: 164,
         in_degree: 2.0,
         index: 164,
@@ -2801,15 +2801,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremswith274276',
         out_degree: 202.0,
         pagerank: 0.00074271864055341,
-        x: 29,
-        y: 19
+        x: 46,
+        y: 87
     },
     {
         betweenness: 0.00025318565480458383,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 178.0,
-        eigen_centrality: 0.00012939212609134896,
+        eigen_centrality: 0.00012939212609135105,
         id: 165,
         in_degree: 2.0,
         index: 165,
@@ -2818,15 +2818,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremswith298300',
         out_degree: 176.0,
         pagerank: 0.00074271864055341,
-        x: 15,
-        y: 61
+        x: 99,
+        y: 84
     },
     {
         betweenness: 0.00016359107890863805,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 218.0,
-        eigen_centrality: 0.00012939212609132945,
+        eigen_centrality: 0.00012939212609134162,
         id: 166,
         in_degree: 2.0,
         index: 166,
@@ -2835,8 +2835,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremswith322324',
         out_degree: 216.0,
         pagerank: 0.00074271864055341,
-        x: 98,
-        y: 34
+        x: 10,
+        y: 82
     },
     {
         betweenness: 0.00112402564457359,
@@ -2852,8 +2852,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsfromgraph350',
         out_degree: 29.0,
         pagerank: 0.0012672476098906252,
-        x: 55,
-        y: 48
+        x: 87,
+        y: 93
     },
     {
         betweenness: 0.0003780468413096059,
@@ -2869,8 +2869,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsgraphlaws378',
         out_degree: 270.0,
         pagerank: 0.0007564453188461815,
-        x: 72,
-        y: 37
+        x: 32,
+        y: 42
     },
     {
         betweenness: 0.0002590663798633911,
@@ -2886,8 +2886,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremstofromidentity410',
         out_degree: 193.0,
         pagerank: 0.0007554656281788994,
-        x: 43,
-        y: 16
+        x: 76,
+        y: 79
     },
     {
         betweenness: 5.055826973635193e-06,
@@ -2903,8 +2903,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremsfromtoidentity426',
         out_degree: 304.0,
         pagerank: 0.0007616300032841677,
-        x: 59,
-        y: 79
+        x: 54,
+        y: 68
     },
     {
         betweenness: 1.5965769390426926e-06,
@@ -2920,15 +2920,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheoremswith436438',
         out_degree: 231.0,
         pagerank: 0.0007442864648429479,
-        x: 4,
-        y: 78
+        x: 55,
+        y: 4
     },
     {
         betweenness: 0.002662935169161819,
         co: 'brown',
         current_flow_betweenness: 0.0,
         degree: 320.0,
-        eigen_centrality: 0.10111567257899623,
+        eigen_centrality: 0.10111567257899977,
         id: 172,
         in_degree: 316.0,
         index: 172,
@@ -2937,15 +2937,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphLabelledGraph12',
         out_degree: 4.0,
         pagerank: 0.02543074411075243,
-        x: 70,
-        y: 38
+        x: 30,
+        y: 49
     },
     {
         betweenness: 0.0003641152676021917,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 93.0,
-        eigen_centrality: 0.023785453856413494,
+        eigen_centrality: 0.023785453856414215,
         id: 173,
         in_degree: 90.0,
         index: 173,
@@ -2954,15 +2954,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphLabelledGraphε22',
         out_degree: 3.0,
         pagerank: 0.006953457195922958,
-        x: 38,
-        y: 74
+        x: 32,
+        y: 71
     },
     {
         betweenness: 0.00013580476531908662,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 11.0,
-        eigen_centrality: 0.021758939633544062,
+        eigen_centrality: 0.02175893963354466,
         id: 174,
         in_degree: 8.0,
         index: 174,
@@ -2971,15 +2971,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphLabelledGraphv24',
         out_degree: 3.0,
         pagerank: 0.006247765994408868,
-        x: 34,
-        y: 99
+        x: 43,
+        y: 70
     },
     {
         betweenness: 0.0009200661660188436,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 760.0,
-        eigen_centrality: 0.05519928658027418,
+        eigen_centrality: 0.055199286580276646,
         id: 175,
         in_degree: 755.0,
         index: 175,
@@ -2988,15 +2988,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphLabelledGraph26',
         out_degree: 5.0,
         pagerank: 0.011301965365557838,
-        x: 76,
-        y: 54
+        x: 62,
+        y: 10
     },
     {
         betweenness: 0.0001932328084258346,
         co: 'green',
         current_flow_betweenness: 0.0,
         degree: 322.0,
-        eigen_centrality: 0.0011818258799963309,
+        eigen_centrality: 0.0011818258799968654,
         id: 176,
         in_degree: 312.0,
         index: 176,
@@ -3005,8 +3005,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraph36',
         out_degree: 10.0,
         pagerank: 0.0026496246250947435,
-        x: 49,
-        y: 73
+        x: 50,
+        y: 45
     },
     {
         betweenness: 4.334844621270524e-05,
@@ -3022,15 +3022,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraph52',
         out_degree: 10.0,
         pagerank: 0.0007501926490685178,
-        x: 23,
-        y: 14
+        x: 37,
+        y: 83
     },
     {
         betweenness: 0.010625345665818893,
         co: 'brown',
         current_flow_betweenness: 0.0,
         degree: 124.0,
-        eigen_centrality: 0.004407714767808115,
+        eigen_centrality: 0.004407714767808737,
         id: 178,
         in_degree: 109.0,
         index: 178,
@@ -3039,15 +3039,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraph72',
         out_degree: 15.0,
         pagerank: 0.0059772182177292585,
-        x: 6,
-        y: 2
+        x: 67,
+        y: 48
     },
     {
         betweenness: 0.00029053968032797427,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 11.0,
-        eigen_centrality: 0.0007146582716406057,
+        eigen_centrality: 0.0007146582716406318,
         id: 179,
         in_degree: 7.0,
         index: 179,
@@ -3056,15 +3056,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphreflexivity84',
         out_degree: 4.0,
         pagerank: 0.0011829891533337946,
-        x: 67,
-        y: 99
+        x: 90,
+        y: 97
     },
     {
         betweenness: 6.474948878435803e-05,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 45.0,
-        eigen_centrality: 0.0007146582716405216,
+        eigen_centrality: 0.0007146582716405996,
         id: 180,
         in_degree: 39.0,
         index: 180,
@@ -3073,15 +3073,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphsymmetry90',
         out_degree: 6.0,
         pagerank: 0.0012105514086996104,
-        x: 68,
-        y: 20
+        x: 56,
+        y: 56
     },
     {
         betweenness: 0.00037608199189768303,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 14.0,
-        eigen_centrality: 0.0007146582716406,
+        eigen_centrality: 0.0007146582716406332,
         id: 181,
         in_degree: 6.0,
         index: 181,
@@ -3090,15 +3090,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphtransitivity98',
         out_degree: 8.0,
         pagerank: 0.001185194397017508,
-        x: 74,
-        y: 65
+        x: 37,
+        y: 44
     },
     {
         betweenness: 0.00021003799023724306,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 20.0,
-        eigen_centrality: 0.0007146582716405852,
+        eigen_centrality: 0.0007146582716406241,
         id: 182,
         in_degree: 11.0,
         index: 182,
@@ -3107,15 +3107,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphleftcongruence108',
         out_degree: 9.0,
         pagerank: 0.0011502018285445665,
-        x: 62,
-        y: 1
+        x: 12,
+        y: 99
     },
     {
         betweenness: 0.00021003799023724306,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 20.0,
-        eigen_centrality: 0.0007146582716406081,
+        eigen_centrality: 0.000714658271640634,
         id: 183,
         in_degree: 11.0,
         index: 183,
@@ -3124,15 +3124,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphrightcongruence118',
         out_degree: 9.0,
         pagerank: 0.001151630308011669,
-        x: 79,
-        y: 84
+        x: 28,
+        y: 10
     },
     {
         betweenness: 5.783098871517303e-05,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 10.0,
-        eigen_centrality: 0.0007146582716406095,
+        eigen_centrality: 0.0007146582716406327,
         id: 184,
         in_degree: 3.0,
         index: 184,
@@ -3141,15 +3141,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphdioidcongruence128',
         out_degree: 7.0,
         pagerank: 0.0010894634146924671,
-        x: 59,
-        y: 92
+        x: 29,
+        y: 67
     },
     {
         betweenness: 6.198208875668403e-05,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 16.0,
-        eigen_centrality: 0.0007146582716405859,
+        eigen_centrality: 0.0007146582716406233,
         id: 185,
         in_degree: 9.0,
         index: 185,
@@ -3158,15 +3158,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphzerocommutativity134',
         out_degree: 7.0,
         pagerank: 0.0011059465395251654,
-        x: 94,
-        y: 78
+        x: 50,
+        y: 56
     },
     {
         betweenness: 0.0004891006323135836,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 11.0,
-        eigen_centrality: 0.0007146582716405993,
+        eigen_centrality: 0.0007146582716406303,
         id: 186,
         in_degree: 5.0,
         index: 186,
@@ -3175,15 +3175,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphleftidentity140',
         out_degree: 6.0,
         pagerank: 0.0010960484817421666,
-        x: 28,
-        y: 26
+        x: 50,
+        y: 37
     },
     {
         betweenness: 0.00046488588207143624,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 18.0,
-        eigen_centrality: 0.0007146582716405803,
+        eigen_centrality: 0.0007146582716406243,
         id: 187,
         in_degree: 12.0,
         index: 187,
@@ -3192,15 +3192,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphrightidentity146',
         out_degree: 6.0,
         pagerank: 0.0011295979911523793,
-        x: 65,
-        y: 39
+        x: 73,
+        y: 19
     },
     {
         betweenness: 6.474948878435803e-05,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 18.0,
-        eigen_centrality: 0.0007146582716405894,
+        eigen_centrality: 0.0007146582716406258,
         id: 188,
         in_degree: 5.0,
         index: 188,
@@ -3209,15 +3209,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphleftdecomposition158',
         out_degree: 13.0,
         pagerank: 0.001109328892867374,
-        x: 3,
-        y: 74
+        x: 98,
+        y: 28
     },
     {
         betweenness: 6.890058882586904e-05,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 21.0,
-        eigen_centrality: 0.0007146582716406006,
+        eigen_centrality: 0.0007146582716406358,
         id: 189,
         in_degree: 8.0,
         index: 189,
@@ -3226,15 +3226,15 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphrightdecomposition170',
         out_degree: 13.0,
         pagerank: 0.0011222034653135824,
-        x: 93,
-        y: 22
+        x: 52,
+        y: 92
     },
     {
         betweenness: 0.001297329693967303,
         co: 'blue',
         current_flow_betweenness: 0.0,
         degree: 13.0,
-        eigen_centrality: 0.0007146582716405926,
+        eigen_centrality: 0.0007146582716406235,
         id: 190,
         in_degree: 3.0,
         index: 190,
@@ -3243,8 +3243,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphlabeladdition180',
         out_degree: 10.0,
         pagerank: 0.0010894634146924671,
-        x: 70,
-        y: 67
+        x: 12,
+        y: 6
     },
     {
         betweenness: 2.1649514177534103e-05,
@@ -3260,8 +3260,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraph190',
         out_degree: 8.0,
         pagerank: 0.0007501926490685178,
-        x: 37,
-        y: 22
+        x: 83,
+        y: 28
     },
     {
         betweenness: 0.0,
@@ -3277,8 +3277,8 @@ var dataNodes = [
         name: 'Prelude8',
         out_degree: 0.0,
         pagerank: 0.0009739774567485105,
-        x: 96,
-        y: 75
+        x: 62,
+        y: 23
     },
     {
         betweenness: 4.1511000415110007e-05,
@@ -3294,8 +3294,8 @@ var dataNodes = [
         name: 'Prelude20',
         out_degree: 1.0,
         pagerank: 0.00898291318983287,
-        x: 92,
-        y: 50
+        x: 46,
+        y: 23
     },
     {
         betweenness: 0.0,
@@ -3311,8 +3311,8 @@ var dataNodes = [
         name: 'Prelude26',
         out_degree: 2.0,
         pagerank: 0.0087916917834985,
-        x: 99,
-        y: 44
+        x: 4,
+        y: 33
     },
     {
         betweenness: 1.5566625155666254e-05,
@@ -3328,8 +3328,8 @@ var dataNodes = [
         name: 'Preludeuncurry34',
         out_degree: 2.0,
         pagerank: 0.0008126887655373782,
-        x: 12,
-        y: 59
+        x: 83,
+        y: 25
     },
     {
         betweenness: 0.0004185692541856926,
@@ -3345,8 +3345,8 @@ var dataNodes = [
         name: 'PreludeList44',
         out_degree: 2.0,
         pagerank: 0.029845169527715154,
-        x: 75,
-        y: 18
+        x: 93,
+        y: 92
     },
     {
         betweenness: 2.0755500207555003e-05,
@@ -3362,8 +3362,8 @@ var dataNodes = [
         name: 'PreludeList48',
         out_degree: 2.0,
         pagerank: 0.014550704935513314,
-        x: 27,
-        y: 80
+        x: 70,
+        y: 10
     },
     {
         betweenness: 5.188875051888751e-06,
@@ -3379,8 +3379,8 @@ var dataNodes = [
         name: 'PreludeList50',
         out_degree: 3.0,
         pagerank: 0.014691591038421908,
-        x: 35,
-        y: 21
+        x: 23,
+        y: 80
     },
     {
         betweenness: 7.437387574373877e-05,
@@ -3396,8 +3396,8 @@ var dataNodes = [
         name: 'Prelude54',
         out_degree: 4.0,
         pagerank: 0.0011026177355615936,
-        x: 40,
-        y: 82
+        x: 52,
+        y: 78
     },
     {
         betweenness: 1.3837000138370001e-05,
@@ -3413,8 +3413,8 @@ var dataNodes = [
         name: 'Prelude60',
         out_degree: 12.0,
         pagerank: 0.0010056838201595712,
-        x: 44,
-        y: 46
+        x: 62,
+        y: 4
     },
     {
         betweenness: 0.00010550712605507127,
@@ -3430,8 +3430,8 @@ var dataNodes = [
         name: 'Preludefoldr74',
         out_degree: 5.0,
         pagerank: 0.0011338035696331805,
-        x: 34,
-        y: 97
+        x: 48,
+        y: 68
     },
     {
         betweenness: 0.0,
@@ -3447,8 +3447,8 @@ var dataNodes = [
         name: 'Preludemap92',
         out_degree: 10.0,
         pagerank: 0.0011027267172716835,
-        x: 1,
-        y: 58
+        x: 73,
+        y: 20
     },
     {
         betweenness: 6.745537567455376e-05,
@@ -3464,8 +3464,8 @@ var dataNodes = [
         name: 'Preludezip106',
         out_degree: 23.0,
         pagerank: 0.000851274384433606,
-        x: 71,
-        y: 55
+        x: 84,
+        y: 92
     },
     {
         betweenness: 0.0,
@@ -3481,8 +3481,8 @@ var dataNodes = [
         name: 'librarytestlib',
         out_degree: 0.0,
         pagerank: 0.0007131721912812376,
-        x: 60,
-        y: 14
+        x: 32,
+        y: 39
     },
     {
         betweenness: 0.0011000415110004151,
@@ -3498,8 +3498,8 @@ var dataNodes = [
         name: 'APITheorems',
         out_degree: 4.0,
         pagerank: 0.0007518570907359336,
-        x: 79,
-        y: 95
+        x: 90,
+        y: 91
     },
     {
         betweenness: 0.0006540453458261677,
@@ -3515,8 +3515,8 @@ var dataNodes = [
         name: 'API',
         out_degree: 19.0,
         pagerank: 0.0008647212819285006,
-        x: 17,
-        y: 73
+        x: 8,
+        y: 26
     },
     {
         betweenness: 0.0,
@@ -3532,8 +3532,8 @@ var dataNodes = [
         name: 'externalsource',
         out_degree: 4.0,
         pagerank: 0.0007131721912812376,
-        x: 72,
-        y: 56
+        x: 17,
+        y: 0
     },
     {
         betweenness: 0.00037359900373599005,
@@ -3549,8 +3549,8 @@ var dataNodes = [
         name: 'AgdaPrimitive',
         out_degree: 9.0,
         pagerank: 0.001448185280920463,
-        x: 37,
-        y: 12
+        x: 11,
+        y: 55
     },
     {
         betweenness: 0.00020755500207555002,
@@ -3566,8 +3566,8 @@ var dataNodes = [
         name: 'Agda',
         out_degree: 1.0,
         pagerank: 0.0008647212819285006,
-        x: 81,
-        y: 16
+        x: 17,
+        y: 97
     },
     {
         betweenness: 0.0017725197177251974,
@@ -3583,8 +3583,8 @@ var dataNodes = [
         name: 'AlgebraDioidBoolTheorems',
         out_degree: 16.0,
         pagerank: 0.0007761790087836674,
-        x: 96,
-        y: 50
+        x: 25,
+        y: 77
     },
     {
         betweenness: 0.0015857202158572024,
@@ -3600,8 +3600,8 @@ var dataNodes = [
         name: 'AlgebraDioidBool',
         out_degree: 10.0,
         pagerank: 0.0007412566764991743,
-        x: 9,
-        y: 0
+        x: 16,
+        y: 57
     },
     {
         betweenness: 0.0022498962224989623,
@@ -3617,8 +3617,8 @@ var dataNodes = [
         name: 'AlgebraDioid',
         out_degree: 29.0,
         pagerank: 0.0009581765544943127,
-        x: 0,
-        y: 94
+        x: 89,
+        y: 39
     },
     {
         betweenness: 0.0033517661942319477,
@@ -3634,8 +3634,8 @@ var dataNodes = [
         name: 'Algebra',
         out_degree: 3.0,
         pagerank: 0.0008647212819285006,
-        x: 75,
-        y: 6
+        x: 23,
+        y: 1
     },
     {
         betweenness: 0.0006987685069876852,
@@ -3651,7 +3651,7 @@ var dataNodes = [
         name: 'AlgebraGraphReasoning',
         out_degree: 12.0,
         pagerank: 0.0007471076109195778,
-        x: 9,
+        x: 33,
         y: 89
     },
     {
@@ -3668,8 +3668,8 @@ var dataNodes = [
         name: 'AlgebraGraph',
         out_degree: 24.0,
         pagerank: 0.0009581765544943127,
-        x: 96,
-        y: 80
+        x: 20,
+        y: 95
     },
     {
         betweenness: 0.0014425072644250728,
@@ -3685,8 +3685,8 @@ var dataNodes = [
         name: 'AlgebraGraphTheorems',
         out_degree: 24.0,
         pagerank: 0.0007471076109195778,
-        x: 86,
-        y: 16
+        x: 43,
+        y: 47
     },
     {
         betweenness: 0.0004981320049813201,
@@ -3702,8 +3702,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphReasoning',
         out_degree: 8.0,
         pagerank: 0.0007501926490685178,
-        x: 80,
-        y: 85
+        x: 79,
+        y: 44
     },
     {
         betweenness: 0.002191780821917808,
@@ -3719,8 +3719,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraph',
         out_degree: 22.0,
         pagerank: 0.0009581765544943127,
-        x: 98,
-        y: 79
+        x: 2,
+        y: 84
     },
     {
         betweenness: 0.0027936903279369035,
@@ -3736,8 +3736,8 @@ var dataNodes = [
         name: 'AlgebraLabelledGraphTheorems',
         out_degree: 22.0,
         pagerank: 0.0007501926490685178,
-        x: 33,
-        y: 23
+        x: 96,
+        y: 49
     },
     {
         betweenness: 0.00024906600249066007,
@@ -3753,8 +3753,8 @@ var dataNodes = [
         name: 'Prelude',
         out_degree: 12.0,
         pagerank: 0.0008647212819285006,
-        x: 85,
-        y: 56
+        x: 65,
+        y: 69
     },
     {
         co: 'blue',
@@ -3770,8 +3770,8 @@ var dataNodes = [
         strongly_connected_components: 151.0,
         tendency_to_make_hub: 486.78687705982225,
         weakly_connected_components: 2.0,
-        x: 98,
-        y: 98
+        x: 24,
+        y: 11
     }
 ];
 var neighbours = [
