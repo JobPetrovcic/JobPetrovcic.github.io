@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<!-- Create a div where the circle will take place -->
+<div id="dataviz_basicZoom"></div>
+
+<script>
+const width = window.innerWidth*0.9;
+const height = window.innerHeight*0.9;
+// append the svg object to the body of the page
+var svg = d3.select("#dataviz_basicZoom")
+  .append("svg")
+    .attr("width",  width)
+    .attr("height",  height)
+    .attr("viewBox", [-width/2, -height/2, width, height])
+    .call(d3.zoom().on("zoom", function (d) {
+       svg.attr("transform", d.transform)
+    }))
+  .append("g")
+
+svg
+  .append("circle")
+    .attr("cx", 300)
+    .attr("cy", 300)
+    .attr("r", 40)
+    .style("fill", "#68b2a1")
+
+</script>
