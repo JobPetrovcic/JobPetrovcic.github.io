@@ -1,224 +1,175 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
+<style>
 
-<svg></svg>
-<script type="text/javascript" src="graph_data.js"></script>
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+</style>
+
+<body>
+
+<!-- load the d3.js library -->	
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script type="text/javascript" src="graph_data.js"></script>
 <script>
 
-n = dataNodes.length
+var n = dataNodes.length;
 
-// create a reverse graph and count degrees.
-// each vertex has 4 additional properties: bool shown, bool is_expanded, int internal_indegree, int number_of_expanded_ins, int trackStackPosition
-for(let i = 0; i < n; ++i){
-  dataNodes[i].shown = false;
-  dataNodes[i].is_expanded = false;
-  dataNodes[i].internal_indegree = 0;
-  dataNodes[i].number_of_expanded_ins = 0;
-}
-
-reverseNeighbours = [];
-for(let i = 0; i < n; ++i) reverseNeighbours.push([]);
-for(let u = 0; u < n; ++u){
-  for(let v of neighbours[u]){
-    // create reverse graph
-    reverseNeighbours[v].push(u);
-
-    // count indegree
-    dataNodes[v].internal_indegree+=1;
-  }
-}
-
-// show a node if it is root
-for(let u = 0;u < n; ++u) if(dataNodes[u].internal_indegree == 0) 
-  dataNodes[u].shown = true;
-
-// transform the graph into a set of edges for d3.js
-// each link has 1 additional property: bool shown
 dataLinks = [];
 linksPointers = [];
 for(let i = 0; i < n; ++i) linksPointers.push([]);
 for(let u = 0; u < n; ++u){
   for(let v of neighbours[u]){
-    dataLinks.push({source: dataNodes[u], target: dataNodes[v]});
-
-    // add the pointer to the last one
-    linksPointers[u].push(dataLinks[dataLinks.length - 1]);
+    dataLinks.push({source: dataNodes[u], target: dataNodes[v], id: dataNodes[u].id.toString() + "->" + dataNodes[v].id.toString()});
   }
 }
 
+// establsih properties
+for(let i = 0; i < n; ++i){
+  dataNodes[i].internalIndegree = 0;
+  dataNodes[i].numberOfExpanded_ins = 0;
+  dataNodes[i].children = [];
+  dataNodes[i].parent = null;
 
-// GRAPHICS
+  dataNodes[i].x = null;
+  dataNodes[i].y = null;
+  dataNodes[i].shown = false;
+  dataNodes[i].expanded = false;
+}
+for(let u = 0; u < n; ++u){
+  for(let v of neighbours[u]){
+    dataNodes[v].internalIndegree+=1;
+  }
+}
 
-//// are we currently tracking a node
-//trackingNode = false; 
-//
-//// list of all previously and currently tracked node, w/ the following properties:
-//// - if an elements has trackStackPosition defined, then it is shown
-//// - if the list is nonempty the last node's trackStackPosition is guaranteed to be defined 
-//// we update the tracked nodes accordingly to the following guidelines:
-//// - if the node is clicked:
-////    if the node is already in the list, all that come before it are deleted, making it the last
-////    else the node is added as the last one
-//// - if the node is collapsed
-////    then all descendants cease to be shown and have their trackStackPosition reset to null
-////    the collapsed node is also removed from the list
-////    the last node with a defined trackStackPosition is now being tracked (or the list becomes empty)
-//trackedNodes = []; 
-//
-//function removeTracking(u){
-//  // while the list is nonempty and the last one does not have trackStackPosition defined, pop it
-//  while(trackedNodes.length > 0 && dataNodes[trackedNodes[trackedNodes.length - 1]].trackStackPosition == null)
-//  {
-//    trackedNodes.pop();
-//
-//  }
-//  if(trackedNodes.length == 0) 
-//    trackingNode = false;
-//}
-//
-//function addTracking(u){
-//  // TODO remove after testing
-//  if(!dataNodes[u].shown)
-//    throw new Error("The node in pending to be tracked should be shown.")
-//  
-//  if(dataNodes[u].trackStackPosition == null){
-//    trackedNodes.push(u)
-//    dataNodes[u].trackStackPosition = trackedNodes.length-1;
-//  }
-//  else{
-//    while(trackedNodes.length > dataNodes[u].trackStackPosition+1)
-//      trackedNodes.pop()
-//  }
-//  trackingNode = true;
-//}
-//
-//function getTrackedNode(){
-//  // TODO remove after testing
-//  if(trackedNodes.length == 0) throw new Error("TrackingNode is true, but there are no nodes to track i. e. trackedNodes list is empty.")
-//  return dataNodes[trackedNodes[trackedNodes.length - 1]];
-//}
+var maxDepth = 0;
+const maxChildrenInALevel = 5;
+// run bfs, get a tree structure
+roots = []
+{
+  var stack = []
+  for(let i = 0; i < n; ++i) if(dataNodes[i].internalIndegree == 0){
+    stack.push(i);
+    roots.push(i);
+    dataNodes[i].shown = true;
+    dataNodes[i].depth = 0;
+  }
 
-function unshow(u){
-  if(dataNodes[u].number_of_expanded_ins == 0 && dataNodes[u].internal_indegree > 0){
+  let curPos = 0;
+  while(curPos < stack.length){
+    let u = dataNodes[stack[curPos]].index;
+    let numberOfChildren = 0;
+    for(let v of neighbours[u]) if(dataNodes[v].depth == null){
+
+      dataNodes[v].depth = dataNodes[u].depth + 1 + Math.floor(numberOfChildren / maxChildrenInALevel);
+      ++numberOfChildren;
+
+      maxDepth = Math.max(maxDepth, dataNodes[v].depth);
+
+      dataNodes[v].parent = u;
+      dataNodes[u].children.push(v);
+
+      stack.push(v);
+    }
+
+    curPos+=1;
+  }
+}
+
+const duration = 750;
+
+// TODO find actual root
+var root = 20522;
+
+// Set the dimensions and margins of the diagram
+var margin = {top: 20, right: 90, bottom: 30, left: 90},
+    width = window.innerWidth*0.9 - margin.left - margin.right,
+    height = window.innerHeight*0.9 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+// appends a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [-width/2, -height/2, width, height])
+    .call(d3.zoom().on("zoom", function (d) {
+      svg.transition().duration(duration).attr("transform", d.transform);
+      console.log(svg.attr("transform"));
+    }))
+  .append("g")
+    .attr("transform", "translate("
+          + "0" + "," + "0" + ") scale(1)");
+    
+
+function unshow(u, r){
+  if(dataNodes[u].numberOfExpanded_ins == 0 && dataNodes[u].internalIndegree > 0){
+    
     if(!dataNodes[u].shown) return;
     dataNodes[u].shown = false;
-    
-    //dataNodes[u].trackStackPosition = null;
+    dataNodes[u].x0 = dataNodes[r].x;
+    dataNodes[u].y0 = dataNodes[r].y;
 
-    collapse(u);
+    collapse(u, r);
   }
 }
 
-function collapse(u){
-  if(!dataNodes[u].is_expanded || neighbours[u].length == 0) return;
-  dataNodes[u].is_expanded = false;
+function collapse(u, r){
   
-  //dataNodes[u].trackStackPosition = null;
-
+  if(!dataNodes[u].expanded || neighbours[u].length == 0) return;
+  dataNodes[u].expanded = false;
+  
   // TODO pazi vrstni red
   for(let e = 0; e < neighbours[u].length; ++e){
     let v = neighbours[u][e];
-    // update number_of_expanded_ins
-    dataNodes[v].number_of_expanded_ins--;
+    // update numberOfExpanded_ins
+    dataNodes[v].numberOfExpanded_ins--;
   }
   for(let e = 0; e < neighbours[u].length; ++e){
     let v = neighbours[u][e];
     // potentially unshow neighbours
-    unshow(v);
+    unshow(v, r);
   }
 }
 
 function expand(u){
   // check if it is already expanded
-  if(dataNodes[u].is_expanded || neighbours[u].length == 0) return;
-  dataNodes[u].is_expanded = true;
+  if(dataNodes[u].expanded || neighbours[u].length == 0) return;
+  dataNodes[u].expanded = true;
 
   for(let e = 0; e < neighbours[u].length; ++e){
-    // show neighbour and update number_of_expanded_ins
+    // show neighbour and update numberOfExpanded_ins
     let v = neighbours[u][e];
 
     dataNodes[v].shown = true;
-    dataNodes[v].number_of_expanded_ins+=1;
+    dataNodes[v].numberOfExpanded_ins+=1;
 
-    dataNodes[v].x = dataNodes[u].x;
-    dataNodes[v].y = dataNodes[u].y;
+    dataNodes[v].x0 = dataNodes[u].x;
+    dataNodes[v].y0 = dataNodes[u].y;
   }
 }
 
-// auxiliary methods for extracting floats from strings
-const numbersRegexp = new RegExp(/\d+(\.\d+)?/, "g") 
-// finds all numbers matching the expression and transforms them to numbers
-const getFloatsFromString = (string) => string.match(numbersRegexp).map(parseFloat)
 
-// percent of distance we cover when the node being tracked is being switched
-const transitionSpeed = 0.75;
-
-colourPalette = 
-{
-  "green":"#1b9e77",
-  "orange":"#d95f02",
-  "blue":"#7570b3",
-  "pink":"#e7298a",
-  "green":"#66a61e",
-  "yellow":"#e6ab02",
-  "brown":"#a6761d",
-  "black":"#666666",
-  "red":"#d62728"
-}
-
-function getColourFromPalette(colour){
-  if(colourPalette[colour] == null) 
-    return colourPalette.black
-  else 
-    return colourPalette[colour]
-}
-
-function setNodeColor(d){
-  if(d.is_expanded || neighbours[d.id].length == 0){
-    return d3.color(getColourFromPalette(d.co)).darker(1)
+function arrangetree(u){
+  for(let i = 0; i< n ;++i){
+    dataNodes[i].x = dataNodes[i].x0 = Math.random() * height;
+    dataNodes[i].y = dataNodes[i].y0 = dataNodes[i].depth * 180;
   }
-  else return d3.color(getColourFromPalette(d.co))
 }
-
-// svg dimensions
-const width = window.innerWidth*0.99;
-const height = window.innerHeight*0.97;
-
-// create a canvas
-const svg = d3
-  .select("svg")
-    .attr("id", "canvas")
-    .attr("viewBox", [-width/2, -height/2, width, height])
-    .attr("width", width)
-    .attr("height", height)
-    .attr("style", "font: 12px sans-serif;")
-    .call(d3.zoom().on("zoom", function (d) {
-      //if(!trackingNode){ // if we are not tracking a node, follow the event i. e. mouse
-        svg.attr("transform", d.transform);
-      //}
-    }))
-  .append("g");
-
-// set initial position of svg; this has to be defined for later when we track nodes
-svg.attr("transform", d3.zoomIdentity);
-
-
-// create one arrow that will be pasted at the end of each connection.
-svg
-  .append('defs')
-  .append('marker')
-  .attr('id', 'arrow')
-  .attr("viewBox", "0 -5 10 10")
-    .attr("refX", 30)
-    .attr("refY", -0.5)
-    .attr("markerWidth", 10)
-    .attr("markerHeight", 10)
-    .attr("orient", "auto")
-  .append("path")
-    .attr("d", "M0,-5L10,0L0,5")
-// add a graphic that contains all links
-const allLinks = svg.append("g")
-  .attr("class", "allLinks");
 
 const nodeRadius = 7;
 const tooltipLineDistance = 1.5; // distance between lines in the tooltip in units em
@@ -230,11 +181,7 @@ const tooltipBoxDistFromNodeX = 7; // the distance from the node and the tooltip
 const tooltipBoxDistFromNodeY = 9; // the distance from the node and the tooltip box in pixels in the x direction
 const tooltipWidth = 250; // tooltip width in pixels
 
-// add a graphic that contains all nodes
-const allNodes = svg.append("g")
-  .attr("class", "allNodes");
-
-nodeProperties = {
+const nodeProperties = {
   name: "name",
   betweenness: "betweenness",
   current_flow_betweenness : "current flow betweenness",
@@ -247,50 +194,78 @@ nodeProperties = {
   pagerank: "pagerank",
 };
 
-// update the simulation
-var simulation = d3.forceSimulation()
-      .force("link", d3.forceLink()
-        .id(d => d.id)
-      )
-      .force("charge", d3.forceManyBody()
-        .strength(-1000)
-      )
-      //.force("x", d3.forceX())
-      //.force("y", d3.forceY());
+const colourPalette = 
+{
+  "green":"#1b9e77",
+  "orange":"#d95f02",
+  "blue":"#7570b3",
+  "pink":"#e7298a",
+  "green":"#66a61e",
+  "yellow":"#e6ab02",
+  "brown":"#a6761d",
+  "black":"#666666",
+  "red":"#d62728"
+};
 
-// create dataLinks and add an arrow to each link
-function update(){
-  links = d3.select(".allLinks")
-    .selectAll("path")
-    .data(d3.filter(dataLinks, d => d.source.shown && d.target.shown), d =>  d.source.id.toString() + "->" + d.target.id.toString())
-    .join(
-      function(enter) {
-        curLink = enter
-          .append("path")
-          .attr("stroke", "#999")
-          .attr("stroke-opacity", 0.6)
-            .attr('stroke', 'black')
-            .attr('marker-end', 'url(#arrow)');
-        return curLink;
-      },
-      function(update) {
-        return update;
-      },
-      function(exit) {
-        // remove the link on exit
-        return exit.remove();
-      }
-    )
+const numbersRegexp = new RegExp(/\d+(\.\d+)?/, "g") 
+// finds all numbers matching the expression and transforms them to numbers
+const getFloatsFromString = (string) => string.match(numbersRegexp).map(parseFloat)
 
-  nodes = d3.select(".allNodes")
+function getColourFromPalette(colour){
+  if(colourPalette[colour] == null) 
+    return colourPalette.black;
+  else 
+    return colourPalette[colour];
+}
+
+function setNodeColor(d){
+  //if(d.expanded || neighbours[d.id].length == 0){
+  //  return d3.color(getColourFromPalette(d.co)).darker(1)
+  //}
+  //else 
+  return d3.color(getColourFromPalette(d.co))
+}
+const allLinks = svg.append("g")
+  .attr("class", "allLinks");
+const allNodes = svg.append("g")
+  .attr("class", "allNodes");
+
+  
+arrangetree(root);
+function update() {
+
+  
+  
+
+  var nodes = dataNodes;
+  //for(let u = 0; u < n; ++u){
+  //  for(let v of neighbours[u]){
+  //    links.push({source: dataNodes[u], target: dataNodes[v], id: dataNodes[u].id.toString() + "->" + dataNodes[v].id.toString()});
+  //  }
+  //}
+
+  // Normalize for fixed-depth.
+
+  // ****************** Nodes section ***************************
+
+  var node = svg.select(".allNodes")
     .selectAll(".node")
-    .data(d3.filter(dataNodes, d => d.shown), d => d.id) // filter those that are marked as shown, d=>d function means that nodes are identified by their data
+    .data(d3.filter(dataNodes, d => d.shown), d => d.id)
     .join(
       function(enter) {
         // create graphic containers for one node to which we will add a circle and text (label)
         curNode = enter
           .append("g")
-            .attr("class", "node");
+            .attr('class', 'node')
+              .attr("transform", function(d) {
+              return "translate(" + d.y0 + "," + d.x0 + ")";
+            })
+        
+        curNode.transition().duration(duration)
+          .attr('class', 'node')
+              .attr("transform", function(d) {
+              return "translate(" + d.y + "," + d.x + ")";
+            })
         
         // create circles around nodes
         curNode 
@@ -320,7 +295,7 @@ function update(){
             .attr("display", "none")
               .append("g");
         
-        tooltipHeight = tooltipLineDistance * (Object.keys(nodeProperties).length + 1); // in ems
+        tooltipHeight = 0.75*tooltipLineDistance * (Object.keys(nodeProperties).length + 1); // in ems
         tooltip.append("rect")
           .attr("class", "tooltipBox")
           .attr("x", tooltipBoxDistFromNodeX.toString() + "px")
@@ -351,115 +326,169 @@ function update(){
         return curNode;
       },
       function(update) {
-        update.select(".nodecircle")
-          .attr("fill", d => setNodeColor(d))
+        //update.select(".node")
+        //  .attr("fill", d => setNodeColor(d))
+        //  .transition()
+        //    .duration(duration)
+        //    .attr("transform", function(d) { 
+        //        return "translate(" + d.y + "," + d.x + ")";
+        //      });
         return update;
       },
       function(exit) {
         // remove the node on exit
-        return exit.remove();
+        return exit.transition()
+          .duration(duration)
+          .attr("transform", function(d) {
+              return "translate(" + d.y0 + "," + d.x0 + ")";
+            }).remove();
       }
     )
-    // TODO, drag starts before click
-    
-    .call(d3.drag() // set drag behaviour
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended))
     .on("click", clicked)
     .on("mouseover", mousedover)
     .on("mouseout", mousedout);
-  
-  // reheat the simulation when drag starts, and fix the subject position
-  function dragstarted(event) {
-    if (!event.active) simulation.alphaTarget(0.3).restart();
-    event.subject.x = event.subject.x;
-    event.subject.y = event.subject.y;
-  }
-  // update the subject (dragged node) position during drag
-  function dragged(event) {
-    event.subject.x = event.x;
-    event.subject.y = event.y;
-  }
-  // restore the target alpha so the simulation cools after dragging ends
-  // unfix the subject position now that it’s no longer being dragged
-  function dragended(event) {
-    if (!event.active) simulation.alphaTarget(0);
-    event.subject.x = null;
-    event.subject.y = null;
-  }
-  function clicked(event){
-    let node = d3.select(this).data()[0]; // select the corresponding datum
-
-    // on click collapse the nodes, or expand it i. e. show its most immediate neighbours (and their whole SCCs)
-    // if node is clicked then:
     
-    if(node.is_expanded){
-      collapse(node.id);
-      //removeTracking(node.id);//  if it is collapsed, stop tracking it, return to previously tracked node
+    function mousedover(event){
+      d3.select(this)
+        .raise() // make sure that the tooltip gets displayed over the nodes
+        .select(".tooltip")
+          .raise()
+          .transition()
+          .delay(duration)
+          .attr("display", "inline")
+      
+      d3.select(this)
+        .select(".tooltipBox")
+          .transition()
+          .attrTween("width", () => (t) => t*tooltipWidth)
+          .delay(duration)
+          .attr("display", "inline");
     }
-    else {
-      expand(node.id);
-      //addTracking(node.id) //  if it is expanded, start tracking it
+    function mousedout(event){
+      nodeG = d3.select(this)
+        .select(".tooltip")
+          .transition()
+            .delay(0)
+          .attr("display", "none");
     }
-    
-    update();
-  }
-  function mousedover(event){
-    d3.select(this)
-      .raise() // make sure that the tooltip gets displayed over the nodes
-      .select(".tooltip")
-        .raise()
-        .transition()
-        .delay(700)
-        .attr("display", "inline")
-  
-    d3.select(this)
-      .select(".tooltipBox")
-        .transition()
-        .attrTween("width", () => (t) => t*tooltipWidth)
-        .delay(700)
-        .attr("display", "inline");
-  }
-  function mousedout(event){
-    nodeG = d3.select(this)
-      .select(".tooltip")
-        .transition()
-          .delay(0)
-        .attr("display", "none");
-  }
 
-  simulation.nodes(nodes.data());
-  simulation.force("link").links(links.data());
+    function clicked(event){
+      let u = d3.select(this).data()[0].id; // select the corresponding datum
+      
+      if(dataNodes[u].expanded){
+        collapse(u, u);
+      }
+      else{
+        expand(u);
+      }
+      //TODO what is happening here
+      let currenttransform = getFloatsFromString(svg.attr("transform"));console.log(svg.attr("transform"));
+      let ck = currenttransform[2];
+      if(ck == null) ck = 1;
 
-  // on simulation tick (refresh graphics) update nodes and edges
-  simulation.on("tick", () => {
-    links
-      .attr('d', d => d3.line()([[d.source.x, d.source.y], [d.target.x, d.target.y]]));
-    nodes
-      .attr("transform", d => `translate(${d.x},${d.y})`);
-    //if(trackingNode){
-      //let currentTrackedNode = getTrackedNode();
+      let translation = d3.zoomIdentity;
+      translation.x = -dataNodes[u].y;
+      translation.y = -dataNodes[u].x;
+      translation.k = ck;
+      
+      svg
+        .transition().duration(duration)
+        .attr("transform", translation);
+
+      console.log(svg.attr("transform"));
+
+      update();
+    }
+
+  // UPDATE
 //
-      //console.log(svg.attr("transform"));
-      //let currenttransform = getFloatsFromString(svg.attr("transform"));
-      //let cx = currenttransform[0], cy = currenttransform[1], ck = currenttransform[2];
+  //// Transition to the proper position for the node
+  //nodeUpdate.transition()
+  //  .duration(duration)
+  //  .attr("transform", function(d) { 
+  //      return "translate(" + d.y + "," + d.x + ")";
+  //   });
+  //// Remove any exiting nodes
+  //var nodeExit = node.exit().transition()
+  //    .duration(duration)
+  //    .attr("transform", function(d) {
+  //        return "translate(" + dataNodes[source].y + "," + dataNodes[source].x + ")";
+  //    })
+  //    .remove();
+
+  // ****************** links section ***************************
+  function diagonal(s, d) {
+    path = `M ${s.y} ${s.x}
+            C ${(s.y + d.y) / 2} ${s.x},
+              ${(s.y + d.y) / 2} ${d.x},
+              ${d.y} ${d.x}`
+
+    return path
+  }
+  links = d3.select(".allLinks")
+    .selectAll("path")
+    .data(d3.filter(dataLinks, d => d.source.shown && d.target.shown), d =>  d.source.id.toString() + "->" + d.target.id.toString())
+    .join(
+      function(enter) {
+        addedLink = enter
+         .insert('path', "g")
+          .attr("class", "link")
+          .attr('d', function(d){
+        return diagonal({x: d.source.x, y: d.source.y}, {x: d.source.x, y: d.source.y})});
+
+        addedLink
+          .transition()
+          .duration(duration)
+          .attr('d', function(d){
+        return diagonal({x: d.source.x, y: d.source.y}, {x: d.target.x, y: d.target.y});
+      });
+      },
+      function(update) {
+        return update
+      },
+      function(exit) {
+        // remove the link on exit
+        return exit.transition()
+          .duration(duration)
+          .attr('d', function(d){ 
+            return diagonal({x: d.target.x0, y: d.target.y0}, {x: d.target.x0, y: d.target.y0});
+          }).remove()
+      }
+    )
+//  // Enter any new links at the parent's previous position.
+//  var linkEnter = link.enter().insert('path', "g")
+//      .attr("class", "link")
+//      .attr('d', function(d){
+//        var o = {x: dataNodes[source].x0, y: dataNodes[source].y0}
+//        return diagonal(o, o)
+//      });
 //
-      //console.log("current: " + cx.toString() + "  " + cy.toString());
-      //console.log("target: " + (-currentTrackedNode.x).toString() + " " + (-currentTrackedNode.y).toString())
+//  // UPDATE
+//  var linkUpdate = linkEnter.merge(link);
 //
-      //let translation = d3.zoomIdentity;
-      //translation.x = transitionSpeed * (-currentTrackedNode.x) + (1 - transitionSpeed) * cx;
-      //translation.y = transitionSpeed * (-currentTrackedNode.y) + (1 - transitionSpeed) * cy;
-      //translation.k = ck;
-      ////let nx = transitionSpeed * (-currentTrackedNode.x)// + (1 - transitionSpeed) * cx;
-      ////let ny = transitionSpeed * (-currentTrackedNode.y)// + (1 - transitionSpeed) * cy;
-      //
-      //svg.attr("transform", translation);
-      //console.log(translation);
-    //}
-  });
+//  // Transition back to the parent element position
+//  linkUpdate.transition()
+//      .duration(duration)
+//      .attr('d', function(d){ return diagonal(d, d.parent) });
+//
+//  // Remove any exiting links
+//  var linkExit = link.exit().transition()
+//      .duration(duration)
+//      .attr('d', function(d) {
+//        var o = {x: source.x, y: source.y}
+//        return diagonal(o, o)
+//      })
+//      .remove();
+//
+//  // Store the old positions for transition.
+//  nodes.forEach(function(d){
+//    d.x0 = d.x;
+//    d.y0 = d.y;
+//  });
+//
 }
 
-update();
+update(root);
+
 </script>
+</body>
