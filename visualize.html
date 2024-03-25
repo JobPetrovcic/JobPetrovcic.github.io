@@ -49,61 +49,61 @@ for(let u = 0; u < n; ++u){
 
 // GRAPHICS
 
-// are we currently tracking a node
-trackingNode = false; 
-
-// list of all previously and currently tracked node, w/ the following properties:
-// - if an elements has trackStackPosition defined, then it is shown
-// - if the list is nonempty the last node's trackStackPosition is guaranteed to be defined 
-// we update the tracked nodes accordingly to the following guidelines:
-// - if the node is clicked:
-//    if the node is already in the list, all that come before it are deleted, making it the last
-//    else the node is added as the last one
-// - if the node is collapsed
-//    then all descendants cease to be shown and have their trackStackPosition reset to null
-//    the collapsed node is also removed from the list
-//    the last node with a defined trackStackPosition is now being tracked (or the list becomes empty)
-trackedNodes = []; 
-
-function removeTracking(u){
-  // while the list is nonempty and the last one does not have trackStackPosition defined, pop it
-  while(trackedNodes.length > 0 && dataNodes[trackedNodes[trackedNodes.length - 1]].trackStackPosition == null)
-  {
-    trackedNodes.pop();
-
-  }
-  if(trackedNodes.length == 0) 
-    trackingNode = false;
-}
-
-function addTracking(u){
-  // TODO remove after testing
-  if(!dataNodes[u].shown)
-    throw new Error("The node in pending to be tracked should be shown.")
-  
-  if(dataNodes[u].trackStackPosition == null){
-    trackedNodes.push(u)
-    dataNodes[u].trackStackPosition = trackedNodes.length-1;
-  }
-  else{
-    while(trackedNodes.length > dataNodes[u].trackStackPosition+1)
-      trackedNodes.pop()
-  }
-  trackingNode = true;
-}
-
-function getTrackedNode(){
-  // TODO remove after testing
-  if(trackedNodes.length == 0) throw new Error("TrackingNode is true, but there are no nodes to track i. e. trackedNodes list is empty.")
-  return dataNodes[trackedNodes[trackedNodes.length - 1]];
-}
+//// are we currently tracking a node
+//trackingNode = false; 
+//
+//// list of all previously and currently tracked node, w/ the following properties:
+//// - if an elements has trackStackPosition defined, then it is shown
+//// - if the list is nonempty the last node's trackStackPosition is guaranteed to be defined 
+//// we update the tracked nodes accordingly to the following guidelines:
+//// - if the node is clicked:
+////    if the node is already in the list, all that come before it are deleted, making it the last
+////    else the node is added as the last one
+//// - if the node is collapsed
+////    then all descendants cease to be shown and have their trackStackPosition reset to null
+////    the collapsed node is also removed from the list
+////    the last node with a defined trackStackPosition is now being tracked (or the list becomes empty)
+//trackedNodes = []; 
+//
+//function removeTracking(u){
+//  // while the list is nonempty and the last one does not have trackStackPosition defined, pop it
+//  while(trackedNodes.length > 0 && dataNodes[trackedNodes[trackedNodes.length - 1]].trackStackPosition == null)
+//  {
+//    trackedNodes.pop();
+//
+//  }
+//  if(trackedNodes.length == 0) 
+//    trackingNode = false;
+//}
+//
+//function addTracking(u){
+//  // TODO remove after testing
+//  if(!dataNodes[u].shown)
+//    throw new Error("The node in pending to be tracked should be shown.")
+//  
+//  if(dataNodes[u].trackStackPosition == null){
+//    trackedNodes.push(u)
+//    dataNodes[u].trackStackPosition = trackedNodes.length-1;
+//  }
+//  else{
+//    while(trackedNodes.length > dataNodes[u].trackStackPosition+1)
+//      trackedNodes.pop()
+//  }
+//  trackingNode = true;
+//}
+//
+//function getTrackedNode(){
+//  // TODO remove after testing
+//  if(trackedNodes.length == 0) throw new Error("TrackingNode is true, but there are no nodes to track i. e. trackedNodes list is empty.")
+//  return dataNodes[trackedNodes[trackedNodes.length - 1]];
+//}
 
 function unshow(u){
   if(dataNodes[u].number_of_expanded_ins == 0 && dataNodes[u].internal_indegree > 0){
     if(!dataNodes[u].shown) return;
     dataNodes[u].shown = false;
     
-    dataNodes[u].trackStackPosition = null;
+    //dataNodes[u].trackStackPosition = null;
 
     collapse(u);
   }
@@ -113,7 +113,7 @@ function collapse(u){
   if(!dataNodes[u].is_expanded || neighbours[u].length == 0) return;
   dataNodes[u].is_expanded = false;
   
-  dataNodes[u].trackStackPosition = null;
+  //dataNodes[u].trackStackPosition = null;
 
   // TODO pazi vrstni red
   for(let e = 0; e < neighbours[u].length; ++e){
@@ -139,8 +139,19 @@ function expand(u){
 
     dataNodes[v].shown = true;
     dataNodes[v].number_of_expanded_ins+=1;
+
+    dataNodes[v].x = dataNodes[u].x;
+    dataNodes[v].y = dataNodes[u].y;
   }
 }
+
+// auxiliary methods for extracting floats from strings
+const numbersRegexp = new RegExp(/\d+(\.\d+)?/, "g") 
+// finds all numbers matching the expression and transforms them to numbers
+const getFloatsFromString = (string) => string.match(numbersRegexp).map(parseFloat)
+
+// percent of distance we cover when the node being tracked is being switched
+const transitionSpeed = 0.75;
 
 colourPalette = 
 {
@@ -181,12 +192,15 @@ const svg = d3
     .attr("width", width)
     .attr("height", height)
     .attr("style", "font: 12px sans-serif;")
-//    .call(d3.zoom().on("zoom", function (d) {
-//      if(!trackingNode){ // if we are not tracking a node, follow the event i. e. mouse
-//        svg.attr("transform", d.transform);
-//      }
-//    }))
+    .call(d3.zoom().on("zoom", function (d) {
+      //if(!trackingNode){ // if we are not tracking a node, follow the event i. e. mouse
+        svg.attr("transform", d.transform);
+      //}
+    }))
   .append("g");
+
+// set initial position of svg; this has to be defined for later when we track nodes
+svg.attr("transform", d3.zoomIdentity);
 
 
 // create one arrow that will be pasted at the end of each connection.
@@ -241,8 +255,8 @@ var simulation = d3.forceSimulation()
       .force("charge", d3.forceManyBody()
         .strength(-1000)
       )
-      .force("x", d3.forceX())
-      .force("y", d3.forceY());
+      //.force("x", d3.forceX())
+      //.force("y", d3.forceY());
 
 // create dataLinks and add an arrow to each link
 function update(){
@@ -348,89 +362,101 @@ function update(){
     )
     // TODO, drag starts before click
     
-    //.call(d3.drag() // set drag behaviour
-        //.on("start", dragstarted)
-        //.on("drag", dragged)
-        //.on("end", dragended))
-        .on("click", clicked);
-        //.on("mouseover", mousedover)
-        //.on("mouseout", mousedout);
+    .call(d3.drag() // set drag behaviour
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended))
+    .on("click", clicked)
+    .on("mouseover", mousedover)
+    .on("mouseout", mousedout);
   
-  //// reheat the simulation when drag starts, and fix the subject position
-  //function dragstarted(event) {
-  //  if (!event.active) simulation.alphaTarget(0.3).restart();
-  //  event.subject.x = event.subject.x;
-  //  event.subject.y = event.subject.y;
-  //}
-  //// update the subject (dragged node) position during drag
-  //function dragged(event) {
-  //  event.subject.x = event.x;
-  //  event.subject.y = event.y;
-  //}
-  //// restore the target alpha so the simulation cools after dragging ends
-  //// unfix the subject position now that it’s no longer being dragged
-  //function dragended(event) {
-  //  if (!event.active) simulation.alphaTarget(0);
-  //  event.subject.x = null;
-  //  event.subject.y = null;
-  //}
+  // reheat the simulation when drag starts, and fix the subject position
+  function dragstarted(event) {
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    event.subject.x = event.subject.x;
+    event.subject.y = event.subject.y;
+  }
+  // update the subject (dragged node) position during drag
+  function dragged(event) {
+    event.subject.x = event.x;
+    event.subject.y = event.y;
+  }
+  // restore the target alpha so the simulation cools after dragging ends
+  // unfix the subject position now that it’s no longer being dragged
+  function dragended(event) {
+    if (!event.active) simulation.alphaTarget(0);
+    event.subject.x = null;
+    event.subject.y = null;
+  }
   function clicked(event){
-    node = d3.select(this).data()[0]; // select the corresponding datum
+    let node = d3.select(this).data()[0]; // select the corresponding datum
 
     // on click collapse the nodes, or expand it i. e. show its most immediate neighbours (and their whole SCCs)
     // if node is clicked then:
     
     if(node.is_expanded){
       collapse(node.id);
-      removeTracking(node.id);//  if it is collapsed, stop tracking it, return to previously tracked node
+      //removeTracking(node.id);//  if it is collapsed, stop tracking it, return to previously tracked node
     }
     else {
       expand(node.id);
-      addTracking(node.id) //  if it is expanded, start tracking it
+      //addTracking(node.id) //  if it is expanded, start tracking it
     }
     
     update();
   }
-  //function mousedover(event){
-  //  d3.select(this)
-  //    .raise() // make sure that the tooltip gets displayed over the nodes
-  //    .select(".tooltip")
-  //      .raise()
-  //      .transition()
-  //      .delay(700)
-  //      .attr("display", "inline")
-  //
-  //  d3.select(this)
-  //    .select(".tooltipBox")
-  //      .transition()
-  //      .attrTween("width", () => (t) => t*tooltipWidth)
-  //      .delay(700)
-  //      .attr("display", "inline");
-  //}
-  //function mousedout(event){
-  //  nodeG = d3.select(this)
-  //    .select(".tooltip")
-  //      .transition()
-  //        .delay(0)
-  //      .attr("display", "none");
-  //}
+  function mousedover(event){
+    d3.select(this)
+      .raise() // make sure that the tooltip gets displayed over the nodes
+      .select(".tooltip")
+        .raise()
+        .transition()
+        .delay(700)
+        .attr("display", "inline")
+  
+    d3.select(this)
+      .select(".tooltipBox")
+        .transition()
+        .attrTween("width", () => (t) => t*tooltipWidth)
+        .delay(700)
+        .attr("display", "inline");
+  }
+  function mousedout(event){
+    nodeG = d3.select(this)
+      .select(".tooltip")
+        .transition()
+          .delay(0)
+        .attr("display", "none");
+  }
 
   simulation.nodes(nodes.data());
   simulation.force("link").links(links.data());
 
   // on simulation tick (refresh graphics) update nodes and edges
   simulation.on("tick", () => {
-    console.log("tick");
     links
       .attr('d', d => d3.line()([[d.source.x, d.source.y], [d.target.x, d.target.y]]));
     nodes
       .attr("transform", d => `translate(${d.x},${d.y})`);
     //if(trackingNode){
-    //  let currentTrackedNode = getTrackedNode();
-    //  let translation = d3.zoomIdentity;
-    //  translation.x = -currentTrackedNode.x;
-    //  translation.y = -currentTrackedNode.y;
-    //  svg.attr("transform", translation);
+      //let currentTrackedNode = getTrackedNode();
+//
+      //console.log(svg.attr("transform"));
+      //let currenttransform = getFloatsFromString(svg.attr("transform"));
+      //let cx = currenttransform[0], cy = currenttransform[1], ck = currenttransform[2];
+//
+      //console.log("current: " + cx.toString() + "  " + cy.toString());
+      //console.log("target: " + (-currentTrackedNode.x).toString() + " " + (-currentTrackedNode.y).toString())
+//
+      //let translation = d3.zoomIdentity;
+      //translation.x = transitionSpeed * (-currentTrackedNode.x) + (1 - transitionSpeed) * cx;
+      //translation.y = transitionSpeed * (-currentTrackedNode.y) + (1 - transitionSpeed) * cy;
+      //translation.k = ck;
+      ////let nx = transitionSpeed * (-currentTrackedNode.x)// + (1 - transitionSpeed) * cx;
+      ////let ny = transitionSpeed * (-currentTrackedNode.y)// + (1 - transitionSpeed) * cy;
+      //
+      //svg.attr("transform", translation);
+      //console.log(translation);
     //}
   });
 }
