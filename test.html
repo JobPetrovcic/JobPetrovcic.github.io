@@ -56,9 +56,7 @@ var svg = d3.select("body").append("svg")
     .attr("transform", "translate("
           + margin.left + "," + margin.top + ")");
 
-var i = 0,
-    duration = 750,
-    root;
+var duration = 750,
 
 // declares a tree layout and assigns the size
 var treemap = d3.tree().size([height, width]);

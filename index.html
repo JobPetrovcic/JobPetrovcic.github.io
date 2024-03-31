@@ -3,7 +3,6 @@
 <style>
 
 .node circle {
-  fill: #fff;
   stroke: steelblue;
   stroke-width: 3px;
 }
@@ -28,143 +27,45 @@
 <script>
 
 var n = dataNodes.length;
+const gapBetweenLevels = 220;
 
 dataLinks = [];
-linksPointers = [];
-for(let i = 0; i < n; ++i) linksPointers.push([]);
 for(let u = 0; u < n; ++u){
   for(let v of neighbours[u]){
-    dataLinks.push({source: dataNodes[u], target: dataNodes[v], id: dataNodes[u].id.toString() + "->" + dataNodes[v].id.toString()});
+    dataLinks.push({source: dataNodes[u], target: dataNodes[v], offset: gapBetweenLevels/2 * Math.random(), id: dataNodes[u].id.toString() + "->" + dataNodes[v].id.toString()});
   }
 }
 
-// establsih properties
+// establish attributes
 for(let i = 0; i < n; ++i){
   dataNodes[i].internalIndegree = 0;
   dataNodes[i].numberOfExpanded_ins = 0;
   dataNodes[i].children = [];
-  dataNodes[i].parent = null;
 
-  dataNodes[i].x = null;
-  dataNodes[i].y = null;
   dataNodes[i].shown = false;
   dataNodes[i].expanded = false;
 }
+
 for(let u = 0; u < n; ++u){
   for(let v of neighbours[u]){
-    dataNodes[v].internalIndegree+=1;
+    dataNodes[v].internalIndegree += 1;
   }
 }
 
-var maxDepth = 0;
-const maxChildrenInALevel = 5;
-// run bfs, get a tree structure
 roots = []
-{
-  var stack = []
-  for(let i = 0; i < n; ++i) if(dataNodes[i].internalIndegree == 0){
-    stack.push(i);
-    roots.push(i);
-    dataNodes[i].shown = true;
-    dataNodes[i].depth = 0;
-  }
-
-  let curPos = 0;
-  while(curPos < stack.length){
-    let u = dataNodes[stack[curPos]].index;
-    let numberOfChildren = 0;
-    for(let v of neighbours[u]) if(dataNodes[v].depth == null){
-
-      dataNodes[v].depth = dataNodes[u].depth + 1 + Math.floor(numberOfChildren / maxChildrenInALevel);
-      ++numberOfChildren;
-
-      maxDepth = Math.max(maxDepth, dataNodes[v].depth);
-
-      dataNodes[v].parent = u;
-      dataNodes[u].children.push(v);
-
-      stack.push(v);
-    }
-
-    curPos+=1;
-  }
-}
-// TODO find actual root
-var root = 20522;
-
-// Set the dimensions and margins of the diagram
-var margin = {top: 20, right: 90, bottom: 30, left: 90},
-    width = 1960 - margin.left - margin.right,
-    height = 1000 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-// appends a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.right + margin.left)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate("
-          + margin.left + "," + margin.top + ")");
-
-function unshow(u, r){
-  if(dataNodes[u].numberOfExpanded_ins == 0 && dataNodes[u].internalIndegree > 0){
-    
-    if(!dataNodes[u].shown) return;
-    dataNodes[u].shown = false;
-    dataNodes[u].x0 = dataNodes[r].x;
-    dataNodes[u].y0 = dataNodes[r].y;
-
-    collapse(u, r);
-  }
+for(let i = 0; i < n; ++i) if(dataNodes[i].internalIndegree == 0){
+  roots.push(i);
+  dataNodes[i].shown = true;
+  dataNodes[i].depth = 0;
 }
 
-function collapse(u, r){
-  
-  if(!dataNodes[u].expanded || neighbours[u].length == 0) return;
-  dataNodes[u].expanded = false;
-  
-  // TODO pazi vrstni red
-  for(let e = 0; e < neighbours[u].length; ++e){
-    let v = neighbours[u][e];
-    // update numberOfExpanded_ins
-    dataNodes[v].numberOfExpanded_ins--;
-  }
-  for(let e = 0; e < neighbours[u].length; ++e){
-    let v = neighbours[u][e];
-    // potentially unshow neighbours
-    unshow(v, r);
-  }
-}
+const maxChildrenInALevel = 5;
 
-function expand(u){
-  // check if it is already expanded
-  if(dataNodes[u].expanded || neighbours[u].length == 0) return;
-  dataNodes[u].expanded = true;
-
-  for(let e = 0; e < neighbours[u].length; ++e){
-    // show neighbour and update numberOfExpanded_ins
-    let v = neighbours[u][e];
-
-    dataNodes[v].shown = true;
-    dataNodes[v].numberOfExpanded_ins+=1;
-
-    dataNodes[v].x0 = dataNodes[u].x;
-    dataNodes[v].y0 = dataNodes[u].y;
-  }
-}
-
-
-function arrangetree(u){
-  for(let i = 0; i< n ;++i){
-    dataNodes[i].x = dataNodes[i].x0 = Math.random() * height;
-    dataNodes[i].y = dataNodes[i].y0 = dataNodes[i].depth * 180;
-  }
-}
-
-const duration = 750;
+const width = 1000;
+const height = 800;
 
 const nodeRadius = 7;
+const nodeSize = 2 * nodeRadius;
 const tooltipLineDistance = 1.5; // distance between lines in the tooltip in units em
 const tooltipInitialOffset = 2; // initial offset between the tooltip and node name in units em
 
@@ -200,6 +101,264 @@ const colourPalette =
   "red":"#d62728"
 };
 
+const numbersRegexp = new RegExp(/\d+(\.\d+)?/, "g")
+// finds all numbers matching the expression and transforms them to numbers
+const getFloatsFromString = (string) => string.match(numbersRegexp).map(parseFloat)
+
+const translateZoomDuration = 150;
+const duration = 650;
+const minimumGapInLevel = 10;
+
+// append the svg object to the body of the page
+// appends a 'group' element to 'svg'
+var svg = d3.select("body").append("svg")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("viewBox", [-width/2, -height/2, width, height])
+  .call(d3.zoom().on("zoom", function (d) {
+    svg.attr("transform", d.transform);
+  }))
+  .append("g")
+    .attr("transform", "translate("
+          + "0" + "," + "0" + ") scale(1)");
+
+var updatePositions;
+function unshow(u){
+  if(dataNodes[u].numberOfExpanded_ins == 0 && dataNodes[u].internalIndegree > 0){
+    if(!dataNodes[u].shown) return;
+    dataNodes[u].shown = false;
+    updatePositions.push(u);
+
+    contract(u);
+  }
+}
+function contract(u){
+  if(!dataNodes[u].expanded || neighbours[u].length == 0) return;
+  dataNodes[u].expanded = false;
+  
+  // TODO pazi vrstni red
+  for(let e = 0; e < neighbours[u].length; ++e){
+    let v = neighbours[u][e];
+    // update numberOfExpanded_ins
+    dataNodes[v].numberOfExpanded_ins -= 1;
+  }
+  for(let e = 0; e < neighbours[u].length; ++e){
+    let v = neighbours[u][e];
+    // potentially unshow neighbours
+    unshow(v);
+  }
+}
+
+function collapse(u, r){
+  updatePositions = [];
+  contract(u);
+
+  arrangeTree();
+ 
+  for(let v of updatePositions){
+    dataNodes[v].x0 = dataNodes[r].x;
+    dataNodes[v].y0 = dataNodes[r].y;
+  }
+}
+
+
+function expand(u){
+  // check if it is already expanded
+  if(dataNodes[u].expanded || neighbours[u].length == 0) return [];
+  dataNodes[u].expanded = true;
+
+  dataNodes[u].children = [];
+
+  let addedNodes = []
+  for(let e = 0; e < neighbours[u].length; ++e){
+    // show neighbour and update numberOfExpanded_ins
+    let v = neighbours[u][e];
+    
+    if(!dataNodes[v].shown){
+      dataNodes[u].children.push(v);
+      dataNodes[v].depth = dataNodes[u].depth + 1;
+
+      addedNodes.push(v);
+    }
+
+    dataNodes[v].shown = true;
+    dataNodes[v].numberOfExpanded_ins += 1;
+
+    dataNodes[v].x0 = dataNodes[u].x;
+    dataNodes[v].y0 = dataNodes[u].y;
+  }
+
+  arrangeTree();
+  return addedNodes
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function getAncestor(v, depthOfAddedChild, defaultValueAncestor){
+  let candidate = dataNodes[v].ancestor;
+  if(dataNodes[candidate].depth == depthOfAddedChild) 
+    return candidate;
+  else 
+    return defaultValueAncestor;
+}
+
+function executeShifts(u){
+  for(let i = dataNodes[u].children.length - 2; i >= 0; --i){ // prefix sum the changes
+    dataNodes[u].change[i] += dataNodes[u].change[i + 1];
+    dataNodes[u].shift[i] += dataNodes[u].shift[i + 1];
+  }
+  for(let i = dataNodes[u].children.length - 2; i >= 0; --i){ // add up the changes
+    dataNodes[u].change[i] += dataNodes[u].change[i + 1];
+  }
+  for(let i = dataNodes[u].children.length - 1; i >= 0; --i){ // sum it up with the shifts
+    dataNodes[u].shift[i] += dataNodes[u].change[i];
+  }
+}
+
+function resolveConflict(u, leftChild, rightChild, dShift){
+  let numberOfBetweenChildren = dataNodes[rightChild].childNumber - dataNodes[leftChild].childNumber;
+  if(dataNodes[rightChild].childNumber <= 0) throw 1;
+  dataNodes[u].shift[dataNodes[u].children.length - 1] += dShift;
+  if(dataNodes[leftChild].childNumber > 0){
+    dataNodes[u].change[dataNodes[leftChild].childNumber - 1] += dShift/numberOfBetweenChildren;
+  }
+  
+  dataNodes[u].change[dataNodes[rightChild].childNumber - 1] -= dShift/numberOfBetweenChildren;
+}
+
+function checkConflict(u, ch){
+  let leftContour = dataNodes[u].leftThread;
+  let rightContour = dataNodes[u].rightThread;
+  let leftContourChild = rightContourChild = ch;
+
+  let curModifier = 0;
+
+  let rightContourPosition = dataNodes[rightContour].modifier;
+  let leftContourChildPosition = dataNodes[leftContourChild].modifier; // = 0 at this point
+  while(true){
+    if(leftContourChildPosition - rightContourPosition < nodeSize + minimumGapInLevel){ // there is a conflict: the nodes overlap or (even worse) the supposed right one is  //the left
+      let dShift = nodeSize + minimumGapInLevel - leftContourChildPosition + rightContourPosition;
+      curModifier += dShift;
+      leftContourChildPosition += dShift;
+      resolveConflict(u, getAncestor(rightContour, dataNodes[ch].depth, dataNodes[u].defaultAncestor), ch, dShift);
+    }
+
+    if(!dataNodes[rightContour].rightThread){ // the current contour is smaller
+      dataNodes[leftContour].leftThread = dataNodes[leftContourChild].leftThread;
+      dataNodes[u].defaultAncestor = ch;
+
+      let goThroughContour = ch;
+      while(goThroughContour){
+        dataNodes[goThroughContour].ancestor = ch;
+        goThroughContour = dataNodes[goThroughContour].rightThread;
+      }
+
+      break;
+    }
+    else if(!dataNodes[leftContourChild].leftThread){ // the current contour is larger
+      dataNodes[rightContourChild].rightThread = dataNodes[rightContour].rightThread;
+      dataNodes[u].defaultAncestor = ch;
+      break;
+    }
+    else{
+      leftContour = dataNodes[leftContour].leftThread;
+      rightContour = dataNodes[rightContour].rightThread;
+      rightContourPosition += dataNodes[rightContour].modifier;
+
+      leftContourChild = dataNodes[leftContourChild].leftThread;
+      leftContourChildPosition += dataNodes[leftContourChild].modifier;
+      rightContourChild = dataNodes[rightContourChild].rightThread; 
+    }
+  }
+
+  dataNodes[u].rightThread = ch; // change right contour of current node u to the right contour of added child
+}
+
+// the actual position is the sum of all modifiers from the root of the tree to the node (including the modifier of the node itself)
+function setUpPositions(u){
+  if(dataNodes[u].shown == false) throw 1
+  dataNodes[u].modifier = 0;
+  dataNodes[u].ancestor = u;
+  
+  // make sure all the children are shown
+  let shownChildren = []
+  for(let v of dataNodes[u].children) if(dataNodes[v].shown){
+    shownChildren.push(v);
+  }
+  dataNodes[u].children = shownChildren;
+
+  dataNodes[u].shift = new Array(dataNodes[u].children.length).fill(0);
+  dataNodes[u].change = new Array(dataNodes[u].children.length).fill(0);
+
+  let childrenCounter = 0;
+  for(let v of dataNodes[u].children){
+    dataNodes[v].childNumber = childrenCounter++;
+
+    setUpPositions(v);
+    if(childrenCounter == 1){
+      dataNodes[u].leftThread = v;
+      dataNodes[u].rightThread = v;
+      
+      dataNodes[u].defaultAncestor = v;
+    }
+    else {
+      checkConflict(u, v);
+    }
+  }
+  
+  // is leaf
+  if(childrenCounter == 0) {
+    dataNodes[u].leftThread = dataNodes[u].rightThread = null;
+  }
+  else{
+    executeShifts(u); // calculate the prefix sums and calculate how much we actually shifted the children during the above process
+    for(let i = 0; i < dataNodes[u].children.length; ++i){
+      let v = dataNodes[u].children[i];
+      dataNodes[v].modifier += dataNodes[u].shift[i];
+    }
+  
+    // at this points all the children are in the desired position between themselves
+    // finally we shift them so that the parent u (whose position and modifiers are still 0 when considering it as a root) is in the middle of the children
+    centeringShift = dataNodes[u].shift[dataNodes[u].shift.length - 1] - dataNodes[u].shift[0];
+    centeringShift /= 2; // in the middle
+
+    for(let v of dataNodes[u].children){
+      dataNodes[v].modifier -= centeringShift; //subtract so that all the children are shifted left
+    }
+  }
+}
+
+function calculatePositions(u, sumOfModifiers){
+  if(!dataNodes[u].shown) throw "should be shown"
+  sumOfModifiers += dataNodes[u].modifier;
+  dataNodes[u].x = sumOfModifiers;
+  dataNodes[u].y = dataNodes[u].depth * gapBetweenLevels;
+
+  for(let v of dataNodes[u].children) if(dataNodes[v].shown){
+    calculatePositions(v, sumOfModifiers);
+  }
+}
+
+function arrangeTree(){
+  defaultAncestor = null;
+
+  for(let r of roots) if(dataNodes[r].shown){
+    dataNodes[r].depth = 0;
+    setUpPositions(r);
+  }
+  
+  let cnt = 0; // TODO cleanup this
+  for(let r of roots){
+    cnt+=100;
+    calculatePositions(r, cnt);
+    dataNodes[r].x0 = dataNodes[r].x;
+    dataNodes[r].y0 = dataNodes[r].y;
+  }
+  
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function getColourFromPalette(colour){
   if(colourPalette[colour] == null) 
     return colourPalette.black;
@@ -208,11 +367,11 @@ function getColourFromPalette(colour){
 }
 
 function setNodeColor(d){
-  //if(d.expanded || neighbours[d.id].length == 0){
-  //  return d3.color(getColourFromPalette(d.co)).darker(1)
-  //}
-  //else 
-  return d3.color(getColourFromPalette(d.co))
+  if(d.expanded || neighbours[d.id].length == 0){
+    return d3.color(getColourFromPalette(d.co)).darker(1).opacity
+  }
+  else 
+    return d3.color(getColourFromPalette(d.co))
 }
 const allLinks = svg.append("g")
   .attr("class", "allLinks");
@@ -220,29 +379,15 @@ const allNodes = svg.append("g")
   .attr("class", "allNodes");
 
   
-arrangetree(root);
 function update() {
-
-  
-  
-
-  var nodes = dataNodes;
-  //for(let u = 0; u < n; ++u){
-  //  for(let v of neighbours[u]){
-  //    links.push({source: dataNodes[u], target: dataNodes[v], id: dataNodes[u].id.toString() + "->" + dataNodes[v].id.toString()});
-  //  }
-  //}
-
-  // Normalize for fixed-depth.
-
-  // ****************** Nodes section ***************************
-
+  // nodes
   var node = svg.select(".allNodes")
     .selectAll(".node")
     .data(d3.filter(dataNodes, d => d.shown), d => d.id)
     .join(
       function(enter) {
         // create graphic containers for one node to which we will add a circle and text (label)
+        
         curNode = enter
           .append("g")
             .attr('class', 'node')
@@ -284,11 +429,11 @@ function update() {
             .attr("display", "none")
               .append("g");
         
-        tooltipHeight = tooltipLineDistance * (Object.keys(nodeProperties).length + 1); // in ems
+        tooltipHeight = 0.75*tooltipLineDistance * (Object.keys(nodeProperties).length + 1); // in ems
         tooltip.append("rect")
           .attr("class", "tooltipBox")
           .attr("x", tooltipBoxDistFromNodeX.toString() + "px")
-          .attr("y", (tooltipInitialOffset*2).toString())
+          .attr("y", (tooltipInitialOffset * 2).toString())
           .attr("height", tooltipHeight.toString() + "em")
           .attr("width", tooltipWidth)
           .style("stroke", "black")
@@ -315,14 +460,10 @@ function update() {
         return curNode;
       },
       function(update) {
-        //update.select(".node")
-        //  .attr("fill", d => setNodeColor(d))
-        //  .transition()
-        //    .duration(duration)
-        //    .attr("transform", function(d) { 
-        //        return "translate(" + d.y + "," + d.x + ")";
-        //      });
-        return update;
+        return update.transition()
+          .duration(duration)
+          .attr("transform", function(d) {
+              return "translate(" + d.y + "," + d.x + ")"});
       },
       function(exit) {
         // remove the node on exit
@@ -334,114 +475,121 @@ function update() {
       }
     )
     .on("click", clicked)
+    .on("mouseover", mousedover)
+    .on("mouseout", mousedout);
+    
+    function mousedover(event){
+      d3.select(this)
+        .raise() // make sure that the tooltip gets displayed over the nodes
+        .select(".tooltip")
+          .raise()
+          .transition()
+          .delay(duration)
+          .attr("display", "inline")
+      
+      d3.select(this)
+        .select(".tooltipBox")
+          .transition()
+          .attrTween("width", () => (t) => t*tooltipWidth)
+          .delay(duration)
+          .attr("display", "inline");
+    }
+    function mousedout(event){
+      nodeG = d3.select(this)
+        .select(".tooltip")
+          .transition()
+            .delay(0)
+          .attr("display", "none");
+    }
 
     function clicked(event){
       let u = d3.select(this).data()[0].id; // select the corresponding datum
       
       if(dataNodes[u].expanded){
         collapse(u, u);
+        update();
       }
       else{
-        expand(u);
+        let addedNodes = expand(u);
+        update();
+        for(let v of addedNodes){
+          dataNodes[v].x0 = dataNodes[v].x;
+          dataNodes[v].y0 = dataNodes[v].y;
+        }
       }
+      
 
-      update();
-  }
+      /*//TODO what is happening here
+      let currenttransform = getFloatsFromString(svg.attr("transform"));
+      let ck = currenttransform[2];
+      if(ck == null) ck = 1;
 
-  // UPDATE
-//
-  //// Transition to the proper position for the node
-  //nodeUpdate.transition()
-  //  .duration(duration)
-  //  .attr("transform", function(d) { 
-  //      return "translate(" + d.y + "," + d.x + ")";
-  //   });
-  //// Remove any exiting nodes
-  //var nodeExit = node.exit().transition()
-  //    .duration(duration)
-  //    .attr("transform", function(d) {
-  //        return "translate(" + dataNodes[source].y + "," + dataNodes[source].x + ")";
-  //    })
-  //    .remove();
+      let translation = d3.zoomIdentity;
+      translation.x = -dataNodes[u].y;
+      translation.y = -dataNodes[u].x;
+      translation.k = ck;
+      
+      svg
+        .transition().duration(translateZoomDuration)
+        .attr("transform", translation);*/
+    }
 
-  // ****************** links section ***************************
-  function diagonal(s, d) {
-    path = `M ${s.y} ${s.x}
+
+  // links
+
+  function diagonal(s, d, offset) {
+    if(s.y == d.y){
+      path = `M ${s.y} ${s.x}
+            C ${(s.y + d.y) / 2 + offset} ${s.x},
+              ${(s.y + d.y) / 2 + offset} ${d.x},
+              ${d.y} ${d.x}`
+              return path
+    }
+    else{
+      path = `M ${s.y} ${s.x}
             C ${(s.y + d.y) / 2} ${s.x},
               ${(s.y + d.y) / 2} ${d.x},
               ${d.y} ${d.x}`
-
-    return path
+              return path
+    }
   }
   links = d3.select(".allLinks")
     .selectAll("path")
-    .data(d3.filter(dataLinks, d => d.source.shown && d.target.shown), d =>  d.source.id.toString() + "->" + d.target.id.toString())
+    .data(d3.filter(dataLinks, d => d.source.shown && d.source.expanded && d.target.shown), d =>  d.source.id.toString() + "->" + d.target.id.toString())
     .join(
       function(enter) {
         addedLink = enter
          .insert('path', "g")
           .attr("class", "link")
           .attr('d', function(d){
-        return diagonal({x: d.source.x, y: d.source.y}, {x: d.source.x, y: d.source.y})});
+        return diagonal({x: d.source.x0, y: d.source.y0}, {x: d.target.x0, y: d.target.y0}, d.offset)});
 
         addedLink
           .transition()
           .duration(duration)
           .attr('d', function(d){
-        return diagonal({x: d.source.x, y: d.source.y}, {x: d.target.x, y: d.target.y});
+        return diagonal({x: d.source.x, y: d.source.y}, {x: d.target.x, y: d.target.y}, d.offset);
       });
       },
       function(update) {
-        return update
-        .transition()
+        return update.transition()
           .duration(duration)
-          .attr('d', function(d){ 
-            return diagonal({x: d.target.x0, y: d.target.y0}, {x: d.target.x0, y: d.target.y0});
-          });
+          .attr('d', function(d){
+          return diagonal({x: d.source.x, y: d.source.y}, {x: d.target.x, y: d.target.y}, d.offset);
+        });
       },
       function(exit) {
         // remove the link on exit
         return exit.transition()
           .duration(duration)
           .attr('d', function(d){ 
-            return diagonal({x: d.target.x0, y: d.target.y0}, {x: d.target.x0, y: d.target.y0});
+            return diagonal({x: d.target.x0, y: d.target.y0}, {x: d.target.x0, y: d.target.y0}, d.offset);
           }).remove()
       }
     )
-//  // Enter any new links at the parent's previous position.
-//  var linkEnter = link.enter().insert('path', "g")
-//      .attr("class", "link")
-//      .attr('d', function(d){
-//        var o = {x: dataNodes[source].x0, y: dataNodes[source].y0}
-//        return diagonal(o, o)
-//      });
-//
-//  // UPDATE
-//  var linkUpdate = linkEnter.merge(link);
-//
-//  // Transition back to the parent element position
-//  linkUpdate.transition()
-//      .duration(duration)
-//      .attr('d', function(d){ return diagonal(d, d.parent) });
-//
-//  // Remove any exiting links
-//  var linkExit = link.exit().transition()
-//      .duration(duration)
-//      .attr('d', function(d) {
-//        var o = {x: source.x, y: source.y}
-//        return diagonal(o, o)
-//      })
-//      .remove();
-//
-//  // Store the old positions for transition.
-//  nodes.forEach(function(d){
-//    d.x0 = d.x;
-//    d.y0 = d.y;
-//  });
-//
 }
-
-update(root);
+arrangeTree();
+update();
 
 </script>
 </body>
