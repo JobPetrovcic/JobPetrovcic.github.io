@@ -44,6 +44,7 @@ for(let i = 0; i < n; ++i){
 
   dataNodes[i].shown = false;
   dataNodes[i].expanded = false;
+  dataNodes[i].visited = false;
 }
 
 for(let u = 0; u < n; ++u){
@@ -123,19 +124,24 @@ var svg = d3.select("body").append("svg")
           + "0" + "," + "0" + ") scale(1)");
 
 var updatePositions;
+var visitedNodes;
+var unshowed;
 function unshow(u){
   if(dataNodes[u].numberOfExpanded_ins == 0 && dataNodes[u].internalIndegree > 0){
     if(!dataNodes[u].shown) return;
     dataNodes[u].shown = false;
-    updatePositions.push(u);
+    unshowed.push(u);
 
     contract(u);
   }
 }
+
 function contract(u){
   if(!dataNodes[u].expanded || neighbours[u].length == 0) return;
   dataNodes[u].expanded = false;
   
+  updatePositions.push(u);
+
   // TODO pazi vrstni red
   for(let e = 0; e < neighbours[u].length; ++e){
     let v = neighbours[u][e];
@@ -152,24 +158,20 @@ function contract(u){
 function collapse(u, r){
   updatePositions = [];
   contract(u);
-
-  arrangeTree();
  
-  for(let v of updatePositions){
-    dataNodes[v].x0 = dataNodes[r].x;
-    dataNodes[v].y0 = dataNodes[r].y;
-  }
+  // TODO 
 }
 
 
 function expand(u){
+  updatePositions = []
+
   // check if it is already expanded
   if(dataNodes[u].expanded || neighbours[u].length == 0) return [];
   dataNodes[u].expanded = true;
 
   dataNodes[u].children = [];
 
-  let addedNodes = []
   for(let e = 0; e < neighbours[u].length; ++e){
     // show neighbour and update numberOfExpanded_ins
     let v = neighbours[u][e];
@@ -178,18 +180,30 @@ function expand(u){
       dataNodes[u].children.push(v);
       dataNodes[v].depth = dataNodes[u].depth + 1;
 
-      addedNodes.push(v);
+      updatePositions.push(v);
+
+      // set intial position to parent; this will be the spawn position
+      dataNodes[v].x = dataNodes[u].x;
+      dataNodes[v].y = dataNodes[u].y;
+
+      //TODO
     }
 
     dataNodes[v].shown = true;
     dataNodes[v].numberOfExpanded_ins += 1;
-
-    dataNodes[v].x0 = dataNodes[u].x;
-    dataNodes[v].y0 = dataNodes[u].y;
   }
+}
 
-  arrangeTree();
-  return addedNodes
+function postProcess(){
+  for(let v of updatePositions){
+    if(!dataNodes[v].visited) {
+      dataNodes[v].shown = false;
+      unshowed.push(v);
+    }
+  }
+  for(let v of visitedNodes){
+    dataNodes[v].visited = false;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -277,6 +291,7 @@ function checkConflict(u, ch){
 // the actual position is the sum of all modifiers from the root of the tree to the node (including the modifier of the node itself)
 function setUpPositions(u){
   if(dataNodes[u].shown == false) throw 1
+
   dataNodes[u].modifier = 0;
   dataNodes[u].ancestor = u;
   
@@ -330,6 +345,13 @@ function setUpPositions(u){
 
 function calculatePositions(u, sumOfModifiers){
   if(!dataNodes[u].shown) throw "should be shown"
+  // save old position for transitions
+  dataNodes[u].x0 = dataNodes[u].x;
+  dataNodes[u].y0 = dataNodes[u].y;
+  dataNodes[u].visited = true;
+  visitedNodes.push(u);
+
+  // calculate new position according to modifiers
   sumOfModifiers += dataNodes[u].modifier;
   dataNodes[u].x = sumOfModifiers;
   dataNodes[u].y = dataNodes[u].depth * gapBetweenLevels;
@@ -340,21 +362,17 @@ function calculatePositions(u, sumOfModifiers){
 }
 
 function arrangeTree(){
-  defaultAncestor = null;
-
+  visitedNodes = [];
   for(let r of roots) if(dataNodes[r].shown){
     dataNodes[r].depth = 0;
     setUpPositions(r);
   }
   
-  let cnt = 0; // TODO cleanup this
+  let currentRootPosition = 0; // TODO cleanup this
   for(let r of roots){
-    cnt+=100;
-    calculatePositions(r, cnt);
-    dataNodes[r].x0 = dataNodes[r].x;
-    dataNodes[r].y0 = dataNodes[r].y;
+    currentRootPosition += minimumGapInLevel + nodeSize;
+    calculatePositions(r, currentRootPosition);
   }
-  
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -392,6 +410,7 @@ function update() {
           .append("g")
             .attr('class', 'node')
               .attr("transform", function(d) {
+                //TODO
               return "translate(" + d.y0 + "," + d.x0 + ")";
             })
         
@@ -463,14 +482,18 @@ function update() {
         return update.transition()
           .duration(duration)
           .attr("transform", function(d) {
-              return "translate(" + d.y + "," + d.x + ")"});
+            //TODO
+            return "translate(" + d.y + "," + d.x + ")"
+          });
       },
       function(exit) {
         // remove the node on exit
         return exit.transition()
           .duration(duration)
           .attr("transform", function(d) {
-              return "translate(" + d.y0 + "," + d.x0 + ")";
+
+            //TODO
+              return "translate(" + d.y + "," + d.x + ")";
             }).remove();
       }
     )
@@ -506,16 +529,27 @@ function update() {
       let u = d3.select(this).data()[0].id; // select the corresponding datum
       
       if(dataNodes[u].expanded){
+        unshowed = [];
         collapse(u, u);
+        arrangeTree();
+        postProcess();
+
+        // unshowed nodes go into the clicked
+        for(let v of unshowed){
+          dataNodes[v].x0 = dataNodes[v].x;
+          dataNodes[v].y0 = dataNodes[v].y;
+          
+          dataNodes[v].x = dataNodes[u].x;
+          dataNodes[v].y = dataNodes[u].y;
+        }
+        
         update();
       }
       else{
-        let addedNodes = expand(u);
+        expand(u);
+        arrangeTree();
+        postProcess();
         update();
-        for(let v of addedNodes){
-          dataNodes[v].x0 = dataNodes[v].x;
-          dataNodes[v].y0 = dataNodes[v].y;
-        }
       }
       
 
@@ -562,7 +596,9 @@ function update() {
          .insert('path', "g")
           .attr("class", "link")
           .attr('d', function(d){
-        return diagonal({x: d.source.x0, y: d.source.y0}, {x: d.target.x0, y: d.target.y0}, d.offset)});
+            //TODO
+          return diagonal({x: d.source.x0, y: d.source.y0}, {x: d.target.x0, y: d.target.y0}, d.offset)
+        });
 
         addedLink
           .transition()
@@ -583,7 +619,8 @@ function update() {
         return exit.transition()
           .duration(duration)
           .attr('d', function(d){ 
-            return diagonal({x: d.target.x0, y: d.target.y0}, {x: d.target.x0, y: d.target.y0}, d.offset);
+            //TODO
+            return diagonal({x: d.source.x, y: d.source.y}, {x: d.target.x, y: d.target.y}, d.offset);
           }).remove()
       }
     )
