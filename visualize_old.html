@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<style>
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+</style>
+
+<body>
+
+<!-- load the d3.js library -->	
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script type="text/javascript" src="graph_data.js"></script>
+<script>
+
+var n = dataNodes.length;
+
+dataLinks = [];
+linksPointers = [];
+for(let i = 0; i < n; ++i) linksPointers.push([]);
+for(let u = 0; u < n; ++u){
+  for(let v of neighbours[u]){
+    dataLinks.push({source: dataNodes[u], target: dataNodes[v], id: dataNodes[u].id.toString() + "->" + dataNodes[v].id.toString()});
+  }
+}
+
+// establsih properties
+for(let i = 0; i < n; ++i){
+  dataNodes[i].internalIndegree = 0;
+  dataNodes[i].numberOfExpanded_ins = 0;
+  dataNodes[i].children = [];
+  dataNodes[i].parent = null;
+
+  dataNodes[i].x = null;
+  dataNodes[i].y = null;
+  dataNodes[i].shown = false;
+  dataNodes[i].expanded = false;
+}
+for(let u = 0; u < n; ++u){
+  for(let v of neighbours[u]){
+    dataNodes[v].internalIndegree+=1;
+  }
+}
+
+var maxDepth = 0;
+const maxChildrenInALevel = 5;
+// run bfs, get a tree structure
+roots = []
+{
+  var stack = []
+  for(let i = 0; i < n; ++i) if(dataNodes[i].internalIndegree == 0){
+    stack.push(i);
+    roots.push(i);
+    dataNodes[i].shown = true;
+    dataNodes[i].depth = 0;
+  }
+
+  let curPos = 0;
+  while(curPos < stack.length){
+    let u = dataNodes[stack[curPos]].index;
+    let numberOfChildren = 0;
+    for(let v of neighbours[u]) if(dataNodes[v].depth == null){
+
+      dataNodes[v].depth = dataNodes[u].depth + 1 + Math.floor(numberOfChildren / maxChildrenInALevel);
+      ++numberOfChildren;
+
+      maxDepth = Math.max(maxDepth, dataNodes[v].depth);
+
+      dataNodes[v].parent = u;
+      dataNodes[u].children.push(v);
+
+      stack.push(v);
+    }
+
+    curPos+=1;
+  }
+}
+
+const duration = 750;
+
+// TODO find actual root
+var root = 20522;
+
+// Set the dimensions and margins of the diagram
+var margin = {top: 20, right: 90, bottom: 30, left: 90},
+    width = window.innerWidth*0.9 - margin.left - margin.right,
+    height = window.innerHeight*0.9 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+// appends a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [-width/2, -height/2, width, height])
+    .call(d3.zoom().on("zoom", function (d) {
+      svg.transition().duration(duration).attr("transform", d.transform);
+      console.log(svg.attr("transform"));
+    }))
+  .append("g")
+    .attr("transform", "translate("
+          + "0" + "," + "0" + ") scale(1)");
+    
+
+function unshow(u, r){
+  if(dataNodes[u].numberOfExpanded_ins == 0 && dataNodes[u].internalIndegree > 0){
+    
+    if(!dataNodes[u].shown) return;
+    dataNodes[u].shown = false;
+    dataNodes[u].x0 = dataNodes[r].x;
+    dataNodes[u].y0 = dataNodes[r].y;
+
+    collapse(u, r);
+  }
+}
+
+function collapse(u, r){
+  
+  if(!dataNodes[u].expanded || neighbours[u].length == 0) return;
+  dataNodes[u].expanded = false;
+  
+  // TODO pazi vrstni red
+  for(let e = 0; e < neighbours[u].length; ++e){
+    let v = neighbours[u][e];
+    // update numberOfExpanded_ins
+    dataNodes[v].numberOfExpanded_ins--;
+  }
+  for(let e = 0; e < neighbours[u].length; ++e){
+    let v = neighbours[u][e];
+    // potentially unshow neighbours
+    unshow(v, r);
+  }
+}
+
+function expand(u){
+  // check if it is already expanded
+  if(dataNodes[u].expanded || neighbours[u].length == 0) return;
+  dataNodes[u].expanded = true;
+
+  for(let e = 0; e < neighbours[u].length; ++e){
+    // show neighbour and update numberOfExpanded_ins
+    let v = neighbours[u][e];
+
+    dataNodes[v].shown = true;
+    dataNodes[v].numberOfExpanded_ins+=1;
+
+    dataNodes[v].x0 = dataNodes[u].x;
+    dataNodes[v].y0 = dataNodes[u].y;
+  }
+}
+
+
+function arrangetree(u){
+  for(let i = 0; i< n ;++i){
+    dataNodes[i].x = dataNodes[i].x0 = Math.random() * height;
+    dataNodes[i].y = dataNodes[i].y0 = dataNodes[i].depth * 180;
+  }
+}
+
+const nodeRadius = 7;
+const tooltipLineDistance = 1.5; // distance between lines in the tooltip in units em
+const tooltipInitialOffset = 2; // initial offset between the tooltip and node name in units em
+
+const timeHoveredToTooltip = 1000; // milisecond for which a user must hover over the node to display the node's tooltip
+
+const tooltipBoxDistFromNodeX = 7; // the distance from the node and the tooltip box in pixels in the x direction
+const tooltipBoxDistFromNodeY = 9; // the distance from the node and the tooltip box in pixels in the x direction
+const tooltipWidth = 250; // tooltip width in pixels
+
+const nodeProperties = {
+  name: "name",
+  betweenness: "betweenness",
+  current_flow_betweenness : "current flow betweenness",
+  degree : "degree",
+  in_degree : "indegree",
+  out_degree : "outdegree",
+  n_cycles : "n-cycles",
+  eigen_centrality : "eigen-centrality",
+  label : "label",
+  pagerank: "pagerank",
+};
+
+const colourPalette = 
+{
+  "green":"#1b9e77",
+  "orange":"#d95f02",
+  "blue":"#7570b3",
+  "pink":"#e7298a",
+  "green":"#66a61e",
+  "yellow":"#e6ab02",
+  "brown":"#a6761d",
+  "black":"#666666",
+  "red":"#d62728"
+};
+
+const numbersRegexp = new RegExp(/\d+(\.\d+)?/, "g") 
+// finds all numbers matching the expression and transforms them to numbers
+const getFloatsFromString = (string) => string.match(numbersRegexp).map(parseFloat)
+
+function getColourFromPalette(colour){
+  if(colourPalette[colour] == null) 
+    return colourPalette.black;
+  else 
+    return colourPalette[colour];
+}
+
+function setNodeColor(d){
+  //if(d.expanded || neighbours[d.id].length == 0){
+  //  return d3.color(getColourFromPalette(d.co)).darker(1)
+  //}
+  //else 
+  return d3.color(getColourFromPalette(d.co))
+}
+const allLinks = svg.append("g")
+  .attr("class", "allLinks");
+const allNodes = svg.append("g")
+  .attr("class", "allNodes");
+
+  
+arrangetree(root);
+function update() {
+
+  
+  
+
+  var nodes = dataNodes;
+  //for(let u = 0; u < n; ++u){
+  //  for(let v of neighbours[u]){
+  //    links.push({source: dataNodes[u], target: dataNodes[v], id: dataNodes[u].id.toString() + "->" + dataNodes[v].id.toString()});
+  //  }
+  //}
+
+  // Normalize for fixed-depth.
+
+  // ****************** Nodes section ***************************
+
+  var node = svg.select(".allNodes")
+    .selectAll(".node")
+    .data(d3.filter(dataNodes, d => d.shown), d => d.id)
+    .join(
+      function(enter) {
+        // create graphic containers for one node to which we will add a circle and text (label)
+        curNode = enter
+          .append("g")
+            .attr('class', 'node')
+              .attr("transform", function(d) {
+              return "translate(" + d.y0 + "," + d.x0 + ")";
+            })
+        
+        curNode.transition().duration(duration)
+          .attr('class', 'node')
+              .attr("transform", function(d) {
+              return "translate(" + d.y + "," + d.x + ")";
+            })
+        
+        // create circles around nodes
+        curNode 
+          .append("circle")
+            .attr("class", "nodecircle")
+            .attr("stroke", "black")
+            .attr("stroke-width", 1.5)
+            .attr("fill", d => setNodeColor(d))
+            .attr("r", nodeRadius)
+
+        // add label to nodes
+        curNode
+          .append("text")
+            .attr("x", 10)
+            .attr("y", "0.31em")
+            .text(d => d.name)
+          // add a white outline to text (label)
+          // NOTE: in svg this will add two <text> badges to a node <g>, one for text and one for outline
+          .clone(true).lower()
+            .attr("fill", "none")
+            .attr("stroke", "white")
+            .attr("stroke-width", 3);
+        
+        tooltip = curNode
+          .append("svg")
+            .attr("class", "tooltip")
+            .attr("display", "none")
+              .append("g");
+        
+        tooltipHeight = 0.75*tooltipLineDistance * (Object.keys(nodeProperties).length + 1); // in ems
+        tooltip.append("rect")
+          .attr("class", "tooltipBox")
+          .attr("x", tooltipBoxDistFromNodeX.toString() + "px")
+          .attr("y", (tooltipInitialOffset*2).toString())
+          .attr("height", tooltipHeight.toString() + "em")
+          .attr("width", tooltipWidth)
+          .style("stroke", "black")
+          .style("stroke-width", 1)
+          .style("rx", "3px")
+          .attr("fill", "black");
+            
+        // add a tooltip showing additional information about the node on hover
+        let cnt = 0;
+        for (const [key, value] of Object.entries(nodeProperties)) {
+          positionY = tooltipLineDistance * cnt + tooltipInitialOffset;
+
+          tooltip.append("text")
+            .attr("fill", "white")
+            .attr("x", 20)
+            .attr("y", positionY.toString() + "em")
+            .attr("font-weight", 600)
+            .text(d => value + ": ")
+            .append("tspan")
+            .attr("font-weight", 300)
+            .text(d => d[key])
+            ++cnt;
+        }
+        return curNode;
+      },
+      function(update) {
+        //update.select(".node")
+        //  .attr("fill", d => setNodeColor(d))
+        //  .transition()
+        //    .duration(duration)
+        //    .attr("transform", function(d) { 
+        //        return "translate(" + d.y + "," + d.x + ")";
+        //      });
+        return update;
+      },
+      function(exit) {
+        // remove the node on exit
+        return exit.transition()
+          .duration(duration)
+          .attr("transform", function(d) {
+              return "translate(" + d.y0 + "," + d.x0 + ")";
+            }).remove();
+      }
+    )
+    .on("click", clicked)
+    .on("mouseover", mousedover)
+    .on("mouseout", mousedout);
+    
+    function mousedover(event){
+      d3.select(this)
+        .raise() // make sure that the tooltip gets displayed over the nodes
+        .select(".tooltip")
+          .raise()
+          .transition()
+          .delay(duration)
+          .attr("display", "inline")
+      
+      d3.select(this)
+        .select(".tooltipBox")
+          .transition()
+          .attrTween("width", () => (t) => t*tooltipWidth)
+          .delay(duration)
+          .attr("display", "inline");
+    }
+    function mousedout(event){
+      nodeG = d3.select(this)
+        .select(".tooltip")
+          .transition()
+            .delay(0)
+          .attr("display", "none");
+    }
+
+    function clicked(event){
+      let u = d3.select(this).data()[0].id; // select the corresponding datum
+      
+      if(dataNodes[u].expanded){
+        collapse(u, u);
+      }
+      else{
+        expand(u);
+      }
+      //TODO what is happening here
+      let currenttransform = getFloatsFromString(svg.attr("transform"));console.log(svg.attr("transform"));
+      let ck = currenttransform[2];
+      if(ck == null) ck = 1;
+
+      let translation = d3.zoomIdentity;
+      translation.x = -dataNodes[u].y;
+      translation.y = -dataNodes[u].x;
+      translation.k = ck;
+      
+      svg
+        .transition().duration(duration)
+        .attr("transform", translation);
+
+      console.log(svg.attr("transform"));
+
+      update();
+    }
+
+  // UPDATE
+//
+  //// Transition to the proper position for the node
+  //nodeUpdate.transition()
+  //  .duration(duration)
+  //  .attr("transform", function(d) { 
+  //      return "translate(" + d.y + "," + d.x + ")";
+  //   });
+  //// Remove any exiting nodes
+  //var nodeExit = node.exit().transition()
+  //    .duration(duration)
+  //    .attr("transform", function(d) {
+  //        return "translate(" + dataNodes[source].y + "," + dataNodes[source].x + ")";
+  //    })
+  //    .remove();
+
+  // ****************** links section ***************************
+  function diagonal(s, d) {
+    path = `M ${s.y} ${s.x}
+            C ${(s.y + d.y) / 2} ${s.x},
+              ${(s.y + d.y) / 2} ${d.x},
+              ${d.y} ${d.x}`
+
+    return path
+  }
+  links = d3.select(".allLinks")
+    .selectAll("path")
+    .data(d3.filter(dataLinks, d => d.source.shown && d.target.shown), d =>  d.source.id.toString() + "->" + d.target.id.toString())
+    .join(
+      function(enter) {
+        addedLink = enter
+         .insert('path', "g")
+          .attr("class", "link")
+          .attr('d', function(d){
+        return diagonal({x: d.source.x, y: d.source.y}, {x: d.source.x, y: d.source.y})});
+
+        addedLink
+          .transition()
+          .duration(duration)
+          .attr('d', function(d){
+        return diagonal({x: d.source.x, y: d.source.y}, {x: d.target.x, y: d.target.y});
+      });
+      },
+      function(update) {
+        return update
+      },
+      function(exit) {
+        // remove the link on exit
+        return exit.transition()
+          .duration(duration)
+          .attr('d', function(d){ 
+            return diagonal({x: d.target.x0, y: d.target.y0}, {x: d.target.x0, y: d.target.y0});
+          }).remove()
+      }
+    )
+//  // Enter any new links at the parent's previous position.
+//  var linkEnter = link.enter().insert('path', "g")
+//      .attr("class", "link")
+//      .attr('d', function(d){
+//        var o = {x: dataNodes[source].x0, y: dataNodes[source].y0}
+//        return diagonal(o, o)
+//      });
+//
+//  // UPDATE
+//  var linkUpdate = linkEnter.merge(link);
+//
+//  // Transition back to the parent element position
+//  linkUpdate.transition()
+//      .duration(duration)
+//      .attr('d', function(d){ return diagonal(d, d.parent) });
+//
+//  // Remove any exiting links
+//  var linkExit = link.exit().transition()
+//      .duration(duration)
+//      .attr('d', function(d) {
+//        var o = {x: source.x, y: source.y}
+//        return diagonal(o, o)
+//      })
+//      .remove();
+//
+//  // Store the old positions for transition.
+//  nodes.forEach(function(d){
+//    d.x0 = d.x;
+//    d.y0 = d.y;
+//  });
+//
+}
+
+update(root);
+
+</script>
+</body>
