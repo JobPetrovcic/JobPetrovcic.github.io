@@ -25,10 +25,8 @@
   <script type="text/javascript" src="scripts/setUpData.js"></script>
   <script type="text/javascript" src="scripts/setupSvg.js"></script>
   <script type="text/javascript" src="scripts/expansion.js"></script>
-  <script type="text/javascript" src="scripts/buchheimetal.js"></script>
+  <script type="text/javascript" src="scripts/arrangeTree.js"></script>
   <script type="text/javascript">
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     function getColourFromPalette(colour) {
       if (colourPalette[colour] == null) {
         return colourPalette.black
@@ -36,10 +34,9 @@
         return colourPalette[colour]
       }
     }
-
     function setNodeColor(d) {
       if (d.expanded || neighbours[d.id].length == 0) {
-        return d3.color(getColourFromPalette(d.co)).darker(1)
+        return d3.color(getColourFromPalette(d.co)).darker(2)
       } else {
         return d3.color(getColourFromPalette(d.co))
       }
@@ -59,14 +56,12 @@
         .join(
           function (enter) {
             // create graphic containers for one node to which we will add a circle and text (label)
-
             curNode = enter
               .append('g')
               .attr('class', 'node')
               .attr('transform', function (d) {
                 return 'translate(' + d.y0 + ',' + d.x0 + ')'
               })
-
             curNode
               .transition()
               .duration(duration)
@@ -74,14 +69,12 @@
               .attr('transform', function (d) {
                 return 'translate(' + d.y + ',' + d.x + ')'
               })
-
             // create circles around nodes
             curNode
               .append('circle')
               .attr('stroke-width', 1.5)
               .attr('fill', d => setNodeColor(d))
               .attr('r', nodeRadius)
-
             // add label to nodes
             curNode
               .append('text')
@@ -95,13 +88,11 @@
               .attr('fill', 'none')
               .attr('stroke', 'white')
               .attr('stroke-width', 3)
-
             tooltip = curNode
               .append('svg')
               .attr('class', 'tooltip')
               .attr('display', 'none')
               .append('g')
-
             tooltipHeight =
               0.75 *
               tooltipLineDistance *
@@ -117,12 +108,10 @@
               .style('stroke-width', 1)
               .style('rx', '3px')
               .attr('fill', 'black')
-
             // add a tooltip showing additional information about the node on hover
             let cnt = 0
             for (const [key, value] of Object.entries(nodeProperties)) {
               positionY = tooltipLineDistance * cnt + tooltipInitialOffset
-
               tooltip
                 .append('text')
                 .attr('fill', 'white')
@@ -138,14 +127,13 @@
             return curNode
           },
           function (update) {
-            update.selectAll('circle').attr('fill', d => setNodeColor(d));
+            update.selectAll('circle').attr('fill', d => setNodeColor(d))
             return update
               .transition()
               .duration(duration)
               .attr('transform', function (d) {
                 return 'translate(' + d.y + ',' + d.x + ')'
               })
-              
           },
           function (exit) {
             // remove the node on exit
@@ -161,7 +149,6 @@
         .on('click', clicked)
         .on('mouseover', mousedover)
         .on('mouseout', mousedout)
-
       function mousedover(event) {
         d3.select(this)
           .raise() // make sure that the tooltip gets displayed over the nodes
@@ -170,7 +157,6 @@
           .transition()
           .delay(duration)
           .attr('display', 'inline')
-
         d3.select(this)
           .select('.tooltipBox')
           .transition()
@@ -179,69 +165,76 @@
           .attr('display', 'inline')
       }
       function mousedout(event) {
-        d3
-          .select(this)
+        d3.select(this)
           .select('.tooltip')
           .transition()
           .delay(0)
           .attr('display', 'none')
       }
-
       function clicked(event) {
         let u = d3.select(this).data()[0].id // select the corresponding datum
-
         if (dataNodes[u].expanded) {
           unshowed = []
-          collapse(u, u)
+          collapse(u)
+          saveOldPositions()
           arrangeTree()
-          postProcess()
-
-          // unshowed nodes go into the clicked
-          for (let v of unshowed) {
-            dataNodes[v].x0 = dataNodes[v].x
-            dataNodes[v].y0 = dataNodes[v].y
-
-            dataNodes[v].x = dataNodes[u].x
-            dataNodes[v].y = dataNodes[u].y
+          for(let v of unshowed){
+            dataNodes[v].x = dataNodes[u].x;
+            dataNodes[v].y = dataNodes[u].y;
           }
-
-          update()
         } else {
           expand(u)
+          saveOldPositions()
           arrangeTree()
-          postProcess()
-          update()
         }
+        // TODO
+        update()
 
+        /*if (dataNodes[u].expanded) {
+        unshowed = []
+        collapse(u, u)
+        arrangeTree()
+        postProcess()
+        // unshowed nodes go into the clicked
+        for (let v of unshowed) {
+          dataNodes[v].x0 = dataNodes[v].x
+          dataNodes[v].y0 = dataNodes[v].y
+          dataNodes[v].x = dataNodes[u].x
+          dataNodes[v].y = dataNodes[u].y
+        }
+        update()
+      } else {
+        expand(u)
+        arrangeTree()
+        postProcess()
+        update()
+      }*/
         /*//TODO what is happening here
-      let currenttransform = getFloatsFromString(svg.attr("transform"));
-      let ck = currenttransform[2];
-      if(ck == null) ck = 1;
-
-      let translation = d3.zoomIdentity;
-      translation.x = -dataNodes[u].y;
-      translation.y = -dataNodes[u].x;
-      translation.k = ck;
-      
-      svg
-        .transition().duration(translateZoomDuration)
-        .attr("transform", translation);*/
+    let currenttransform = getFloatsFromString(svg.attr("transform"));
+    let ck = currenttransform[2];
+    if(ck == null) ck = 1;
+    let translation = d3.zoomIdentity;
+    translation.x = -dataNodes[u].y;
+    translation.y = -dataNodes[u].x;
+    translation.k = ck;
+    
+    svg
+      .transition().duration(translateZoomDuration)
+      .attr("transform", translation);*/
       }
-
       // links
-
       function diagonal(s, d, offset) {
         if (s.y == d.y) {
           path = `M ${s.y} ${s.x}
-            C ${(s.y + d.y) / 2 + offset} ${s.x},
-              ${(s.y + d.y) / 2 + offset} ${d.x},
-              ${d.y} ${d.x}`
+          C ${(s.y + d.y) / 2 + offset} ${s.x},
+            ${(s.y + d.y) / 2 + offset} ${d.x},
+            ${d.y} ${d.x}`
           return path
         } else {
           path = `M ${s.y} ${s.x}
-            C ${(s.y + d.y) / 2} ${s.x},
-              ${(s.y + d.y) / 2} ${d.x},
-              ${d.y} ${d.x}`
+          C ${(s.y + d.y) / 2} ${s.x},
+            ${(s.y + d.y) / 2} ${d.x},
+            ${d.y} ${d.x}`
           return path
         }
       }
@@ -260,18 +253,18 @@
             addedLink = enter
               .insert('path', 'g')
               .attr('class', 'link')
+              .attr('opacity', 0)
               .attr('d', function (d) {
-                //TODO
                 return diagonal(
                   { x: d.source.x0, y: d.source.y0 },
                   { x: d.target.x0, y: d.target.y0 },
                   d.offset
                 )
               })
-
             addedLink
               .transition()
               .duration(duration)
+              .attr('opacity', 1)
               .attr('d', function (d) {
                 return diagonal(
                   { x: d.source.x, y: d.source.y },
@@ -297,6 +290,7 @@
             return exit
               .transition()
               .duration(duration)
+              .attr('opacity', 0)
               .attr('d', function (d) {
                 //TODO
                 return diagonal(
@@ -310,6 +304,7 @@
         )
     }
     arrangeTree()
+    saveOldPositions() // correct order: the first ones created should have old position same as they are foundational
     update()
   </script>
 </body>

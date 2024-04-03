@@ -1,27 +1,25 @@
-var updatePositions
-var visitedNodes
-var unshowed
+var shownNodes = []
+var unshowed = []
 
-function unshow (u) {
-  if (
-    dataNodes[u].numberOfExpandedParents == 0 &&
-    dataNodes[u].internalIndegree > 0
-  ) {
-    if (!dataNodes[u].shown) return
-    dataNodes[u].shown = false
-    unshowed.push(u)
-
-    contract(u)
+function unshowNode (v) {
+  if (!dataNodes[v].shown) {
+    throw 'should be shown'
   }
+  dataNodes[v].shown = false
+  unshowed.push(v)
 }
 
-function contract (u) {
+function showNode (u) {
+  dataNodes[u].shown = true
+  shownNodes.push(u)
+}
+
+function collapse (u) {
   if (!dataNodes[u].expanded || neighbours[u].length == 0) return
+
   dataNodes[u].expanded = false
 
-  updatePositions.push(u)
-
-  // TODO pazi vrstni red
+  // order of bodies of for loops matters
   for (let e = 0; e < neighbours[u].length; ++e) {
     let v = neighbours[u][e]
     // update numberOfExpandedParents
@@ -29,23 +27,21 @@ function contract (u) {
   }
   for (let e = 0; e < neighbours[u].length; ++e) {
     let v = neighbours[u][e]
-    // potentially unshow neighbours
-    unshow(v)
+
+    if (
+      dataNodes[v].numberOfExpandedParents == 0 &&
+      dataNodes[v].internalIndegree > 0
+    ) {
+      unshowNode(v)
+      collapse(v)
+    }
   }
 }
 
-function collapse (u, r) {
-  updatePositions = []
-  contract(u)
-
-  // TODO
-}
-
 function expand (u) {
-  updatePositions = []
-
   // check if it is already expanded
   if (dataNodes[u].expanded || neighbours[u].length == 0) return []
+
   dataNodes[u].expanded = true
 
   dataNodes[u].children = []
@@ -55,31 +51,15 @@ function expand (u) {
     let v = neighbours[u][e]
 
     if (!dataNodes[v].shown) {
+      showNode(v)
+
       dataNodes[u].children.push(v)
-      dataNodes[v].depth = dataNodes[u].depth + 1
 
-      updatePositions.push(v)
-
-      // set intial position to parent; this will be the spawn position
+      // set intial position to parent; this will be the spawn position; once the positions are updated, this will be saved as old
       dataNodes[v].x = dataNodes[u].x
       dataNodes[v].y = dataNodes[u].y
-
-      //TODO
     }
 
-    dataNodes[v].shown = true
     dataNodes[v].numberOfExpandedParents += 1
-  }
-}
-
-function postProcess () {
-  for (let v of updatePositions) {
-    if (!dataNodes[v].visited) {
-      dataNodes[v].shown = false
-      unshowed.push(v)
-    }
-  }
-  for (let v of visitedNodes) {
-    dataNodes[v].visited = false
   }
 }
