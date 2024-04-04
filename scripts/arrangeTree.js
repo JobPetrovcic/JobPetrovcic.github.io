@@ -59,7 +59,7 @@ function arrangeTree () {
   // remove nodes which are no longer connected to a root
   for (let v of shownNodes) {
     if (!dataNodes[v].visited) {
-      dataNodes[v].shown = false
+      unshowNode(v);
     }
   }
 
@@ -69,7 +69,7 @@ function arrangeTree () {
   
   for (let u = 0; u < numberOfNodes; ++u) {
     // TODO remove this after testing
-    if (dataNodes[u].visited) throw 'visited should be false'
+    if (dataNodes[u].visited) debugger;
   }
 
   shownNodes = cleanedShownNodes(shownNodes)

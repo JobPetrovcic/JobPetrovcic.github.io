@@ -46,6 +46,4 @@ roots = []
 for (let i = 0; i < numberOfNodes; ++i)
   if (dataNodes[i].internalIndegree == 0) {
     roots.push(i)
-    dataNodes[i].shown = true
-    dataNodes[i].depth = 0
   }

@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <meta charset="UTF-8" />
 <style>
-  .node circle {
-    stroke: steelblue;
-    stroke-width: 3px;
-  }
-
-  .node text {
+  .optionsMenu {
     font: 12px sans-serif;
   }
-
-  .link {
-    fill: none;
-    stroke: #ccc;
-    stroke-width: 2px;
+  .nodes text {
+    font: 12px sans-serif;
   }
 </style>
 
@@ -34,45 +26,58 @@
         return colourPalette[colour]
       }
     }
-    function setNodeColor(d) {
-      if (d.expanded || neighbours[d.id].length == 0) {
-        return d3.color(getColourFromPalette(d.co)).darker(2)
+    function setNodeColor(node) {
+      if (node.expanded || neighbours[node.id].length == 0) {
+        return d3.color(getColourFromPalette(node.co)).darker(2)
       } else {
-        return d3.color(getColourFromPalette(d.co))
+        return d3.color(getColourFromPalette(node.co))
       }
     }
+    function getLinkAttribute(linkData, onNormal, onHighlighted, onTrack, onSourceHover){
+      if(linkData.source.hovered) return onSourceHover
+      else if(linkData.tracked) return onTrack
+      else if(linkData.hovered) return onHighlighted
+      else return onNormal
+    }
+    function setLinkAttributes(link, linkData){
+      link
+        .attr('stroke', getLinkAttribute(linkData, linkColor, linkColorHighlighted, linkColorTracked, linkColorSourceHovered))
+        .attr('stroke-width', getLinkAttribute(linkData, linkWidth, linkWidthHighlighted, linkWidthTracked, linkWidthSourceHovered))
+    }
+
     const allLinks = svg.append('g').attr('class', 'allLinks')
     const allNodes = svg.append('g').attr('class', 'allNodes')
 
     function update() {
       // nodes
-      var node = svg
+      var nodes = svg
         .select('.allNodes')
-        .selectAll('.node')
+        .selectAll('.nodes')
         .data(
           d3.filter(dataNodes, d => d.shown),
           d => d.id
         )
         .join(
           function (enter) {
-            // create graphic containers for one node to which we will add a circle and text (label)
+            // create graphic containers for one nodes to which we will add a circle and text (label)
             curNode = enter
               .append('g')
-              .attr('class', 'node')
+              .attr('class', 'nodes')
               .attr('transform', function (d) {
                 return 'translate(' + d.y0 + ',' + d.x0 + ')'
               })
             curNode
               .transition()
               .duration(duration)
-              .attr('class', 'node')
+              .attr('class', 'nodes')
               .attr('transform', function (d) {
                 return 'translate(' + d.y + ',' + d.x + ')'
               })
             // create circles around nodes
             curNode
               .append('circle')
-              .attr('stroke-width', 1.5)
+              .attr('stroke-width', nodeStrokeWidth)
+              .attr('stroke', nodeCircleColor)
               .attr('fill', d => setNodeColor(d))
               .attr('r', nodeRadius)
             // add label to nodes
@@ -82,7 +87,7 @@
               .attr('y', '0.31em')
               .text(d => d.name)
               // add a white outline to text (label)
-              // NOTE: in svg this will add two <text> badges to a node <g>, one for text and one for outline
+              // NOTE: in svg this will add two <text> badges to a nodes <g>, one for text and one for outline
               .clone(true)
               .lower()
               .attr('fill', 'none')
@@ -108,7 +113,7 @@
               .style('stroke-width', 1)
               .style('rx', '3px')
               .attr('fill', 'black')
-            // add a tooltip showing additional information about the node on hover
+            // add a tooltip showing additional information about the nodes on hover
             let cnt = 0
             for (const [key, value] of Object.entries(nodeProperties)) {
               positionY = tooltipLineDistance * cnt + tooltipInitialOffset
@@ -136,7 +141,7 @@
               })
           },
           function (exit) {
-            // remove the node on exit
+            // remove the nodes on exit
             return exit
               .transition()
               .duration(duration)
@@ -150,6 +155,9 @@
         .on('mouseover', mousedover)
         .on('mouseout', mousedout)
       function mousedover(event) {
+        let node = d3.select(this).data()[0]
+        node.hovered = true
+
         d3.select(this)
           .raise() // make sure that the tooltip gets displayed over the nodes
           .select('.tooltip')
@@ -165,6 +173,9 @@
           .attr('display', 'inline')
       }
       function mousedout(event) {
+        let node = d3.select(this).data()[0]
+        node.hovered = null
+
         d3.select(this)
           .select('.tooltip')
           .transition()
@@ -178,50 +189,18 @@
           collapse(u)
           saveOldPositions()
           arrangeTree()
-          for(let v of unshowed){
-            dataNodes[v].x = dataNodes[u].x;
-            dataNodes[v].y = dataNodes[u].y;
+          for (let v of unshowed) {
+            dataNodes[v].x = dataNodes[u].x
+            dataNodes[v].y = dataNodes[u].y
           }
         } else {
           expand(u)
           saveOldPositions()
           arrangeTree()
         }
-        // TODO
         update()
-
-        /*if (dataNodes[u].expanded) {
-        unshowed = []
-        collapse(u, u)
-        arrangeTree()
-        postProcess()
-        // unshowed nodes go into the clicked
-        for (let v of unshowed) {
-          dataNodes[v].x0 = dataNodes[v].x
-          dataNodes[v].y0 = dataNodes[v].y
-          dataNodes[v].x = dataNodes[u].x
-          dataNodes[v].y = dataNodes[u].y
-        }
-        update()
-      } else {
-        expand(u)
-        arrangeTree()
-        postProcess()
-        update()
-      }*/
-        /*//TODO what is happening here
-    let currenttransform = getFloatsFromString(svg.attr("transform"));
-    let ck = currenttransform[2];
-    if(ck == null) ck = 1;
-    let translation = d3.zoomIdentity;
-    translation.x = -dataNodes[u].y;
-    translation.y = -dataNodes[u].x;
-    translation.k = ck;
-    
-    svg
-      .transition().duration(translateZoomDuration)
-      .attr("transform", translation);*/
       }
+      
       // links
       function diagonal(s, d, offset) {
         if (s.y == d.y) {
@@ -238,7 +217,7 @@
           return path
         }
       }
-      links = d3
+      var links = d3
         .select('.allLinks')
         .selectAll('path')
         .data(
@@ -252,7 +231,10 @@
           function (enter) {
             addedLink = enter
               .insert('path', 'g')
-              .attr('class', 'link')
+              .attr('fill', 'none')
+              .attr('stroke', linkColor)
+              .attr('stroke-width', linkWidth)
+              .attr('class', 'links')
               .attr('opacity', 0)
               .attr('d', function (d) {
                 return diagonal(
@@ -275,6 +257,9 @@
           },
           function (update) {
             return update
+              /*.attr('stroke ', link => {
+                // TODO
+              })*/
               .transition()
               .duration(duration)
               .attr('d', function (d) {
@@ -286,7 +271,7 @@
               })
           },
           function (exit) {
-            // remove the link on exit
+            // remove the links on exit
             return exit
               .transition()
               .duration(duration)
@@ -302,6 +287,33 @@
               .remove()
           }
         )
+      
+      d3.selectAll('.allLinks').selectAll('.links').on('mouseover', mousedoverlink)
+        .on('mouseout', mousedoutlink)
+        .on('click', clickedlink)
+
+      function mousedoverlink(event) { 
+        let link = d3.select(this).data()[0]
+        link.hovered = true;
+        setLinkAttributes(d3.select(this), d3.select(this).data()[0])
+      }
+      function mousedoutlink(event) {
+        let link = d3.select(this).data()[0]
+        link.hovered = null;
+        setLinkAttributes(d3.select(this), d3.select(this).data()[0])
+      }
+      function clickedlink(event) {
+        let link = d3.select(this).data()[0]
+
+        if(link.tracked == null){
+          link.tracked = true
+        }
+        else{
+          link.tracked = null;
+        }
+
+        setLinkAttributes(d3.select(this), d3.select(this).data()[0])
+      }
     }
     arrangeTree()
     saveOldPositions() // correct order: the first ones created should have old position same as they are foundational

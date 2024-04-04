@@ -2,22 +2,23 @@ var shownNodes = []
 var unshowed = []
 
 function unshowNode (v) {
-  if (!dataNodes[v].shown) {
-    throw 'should be shown'
-  }
+  if(!dataNodes[v].shown) return
   dataNodes[v].shown = false
   unshowed.push(v)
+  collapse(v);
 }
 
-function showNode (u) {
-  dataNodes[u].shown = true
-  shownNodes.push(u)
+function showNode (v) {
+  if(dataNodes[v].shown) return
+  dataNodes[v].shown = true
+  shownNodes.push(v)
 }
 
 function collapse (u) {
-  if (!dataNodes[u].expanded || neighbours[u].length == 0) return
+  if (!dataNodes[u].expanded) return
 
   dataNodes[u].expanded = false
+  dataNodes[u].children = [];
 
   // order of bodies of for loops matters
   for (let e = 0; e < neighbours[u].length; ++e) {
@@ -33,14 +34,13 @@ function collapse (u) {
       dataNodes[v].internalIndegree > 0
     ) {
       unshowNode(v)
-      collapse(v)
     }
   }
 }
 
 function expand (u) {
   // check if it is already expanded
-  if (dataNodes[u].expanded || neighbours[u].length == 0) return []
+  if (dataNodes[u].expanded) return
 
   dataNodes[u].expanded = true
 
@@ -49,6 +49,8 @@ function expand (u) {
   for (let e = 0; e < neighbours[u].length; ++e) {
     // show neighbour and update numberOfExpandedParents
     let v = neighbours[u][e]
+
+    dataNodes[v].numberOfExpandedParents += 1
 
     if (!dataNodes[v].shown) {
       showNode(v)
@@ -59,7 +61,5 @@ function expand (u) {
       dataNodes[v].x = dataNodes[u].x
       dataNodes[v].y = dataNodes[u].y
     }
-
-    dataNodes[v].numberOfExpandedParents += 1
   }
 }

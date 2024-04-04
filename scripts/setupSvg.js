@@ -12,3 +12,13 @@ var svg = d3
     })
   )
   .append('g')
+
+//var optionsMenu = d3.select("body").append("div").attr('class', 'optionsMenu')
+//var inputShowOnlyNecessary = optionsMenu
+//  .append('label')
+//      .attr('for',function(d,i){ return 'a'+i; })
+//      .text('Show only necessary links (recommended when viewing a large number of nodes):')
+//  .append("input")
+//      .attr("type", "checkbox")
+//      .attr("id", function(d,i) { return 'a'+i; })
+//      .attr("onClick", "change(this)");
